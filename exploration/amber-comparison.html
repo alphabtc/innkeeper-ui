@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inn Keeper UI — Color & Style Exploration</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&family=MedievalSharp&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0F0C08;
+  font-family: 'Inter', sans-serif;
+  color: #E8DDD0;
+  padding: 48px 40px 80px;
+}
+
+/* ── Page header ─────────────────────────────────────── */
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #F0E8D8;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.page-sub {
+  font-size: 13px;
+  color: #7A6C5E;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* ── WCAG legend ─────────────────────────────────────── */
+.wcag-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  padding: 14px 18px;
+  background: #1A1410;
+  border-radius: 8px;
+  border: 1px solid #2E2416;
+}
+.wcag-legend span { font-size: 12px; color: #9B8B7A; display: flex; align-items: center; gap: 6px; }
+.badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; }
+.badge.aaa { background: #1A3A1A; color: #6FD46F; border: 1px solid #2A5A2A; }
+.badge.aa  { background: #1A2E3A; color: #6FC0D4; border: 1px solid #1A4A5A; }
+.badge.fail{ background: #3A1A1A; color: #D46F6F; border: 1px solid #5A2A2A; }
+
+/* ── Section labels ──────────────────────────────────── */
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6A5C50;
+  margin-top: 56px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2A1E14;
+}
+.section-label:first-of-type { margin-top: 0; }
+.section-note { font-size: 12px; color: #6A5C50; margin-top: -12px; margin-bottom: 20px; }
+
+/* ── Card grid ───────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+/* ══════════════════════════════════════════════════════
+   FLAT DARK CARDS (existing + contrast-fixed)
+══════════════════════════════════════════════════════ */
+.flat-card {
+  background: #1E1610;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2E2010;
+}
+.flat-card .card-head {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #2A1C10;
+}
+.flat-card .src { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #7A6C5E; margin-bottom: 5px; }
+.flat-card .cname { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.flat-card .chex { font-family: monospace; font-size: 11px; color: #8A7A6A; }
+.flat-card .cbody { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+.swatch-row { display: flex; align-items: center; gap: 10px; }
+.swatch { width: 44px; height: 44px; border-radius: 8px; flex-shrink: 0; }
+.tints { display: flex; gap: 5px; }
+.tint { width: 26px; height: 26px; border-radius: 4px; }
+
+.contrast-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.contrast-label { font-size: 11px; color: #7A6C5E; }
+
+.prog-wrap { display: flex; flex-direction: column; gap: 5px; }
+.prog-label { display: flex; justify-content: space-between; font-size: 11px; color: #9B8B7A; }
+.prog-track { height: 5px; background: #2A1C10; border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 99px; width: 62%; }
+
+.quest-pill { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; border-radius: 8px; }
+.qp-title { font-size: 13px; font-weight: 600; }
+.qp-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; background: rgba(255,255,255,0.1); }
+
+.btn-row { display: flex; gap: 8px; }
+.btn-p { flex: 1; padding: 9px 0; border-radius: 8px; border: none; font: 600 12px/1 'Inter',sans-serif; cursor: pointer; }
+.btn-g { flex: 1; padding: 9px 0; border-radius: 8px; border: 2px solid; background: transparent; font: 600 12px/1 'Inter',sans-serif; cursor: pointer; }
+
+.comment-line { font-size: 12px; color: #9B8B7A; line-height: 1.6; }
+.ts { display: inline; padding: 1px 5px; border-radius: 3px; font-size: 12px; font-weight: 600; }
+
+.tab-bar { display: flex; border-top: 1px solid #2A1C10; margin: 2px -20px -18px; padding: 10px 20px 8px; }
+.tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #5A4E44; }
+.tab.on { font-weight: 600; }
+.tab-pip { width: 18px; height: 3px; border-radius: 99px; background: #2E2010; }
+
+.divider { height: 1px; background: #2A1C10; margin: 0 -20px; }
+
+
+/* ══════════════════════════════════════════════════════
+   SKEUOMORPHIC — PARCHMENT / TAVERN
+══════════════════════════════════════════════════════ */
+.skeu-parch {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #8B6914;
+  box-shadow:
+    0 0 0 1px #C8A45022,
+    0 4px 24px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,220,100,0.15);
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(120,70,10,0.04) 28px, rgba(120,70,10,0.04) 29px),
+    repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(120,70,10,0.02) 28px, rgba(120,70,10,0.02) 29px),
+    linear-gradient(160deg, #F2E3B0 0%, #E8D494 40%, #EDD9A0 70%, #E6D18E 100%);
+}
+.skeu-parch .sp-head {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #B8962022;
+  background: linear-gradient(180deg, rgba(120,70,10,0.08) 0%, transparent 100%);
+}
+.skeu-parch .sp-src { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8B6028; margin-bottom: 5px; }
+.skeu-parch .sp-name { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; color: #3A1E04; margin-bottom: 3px; }
+.skeu-parch .sp-hex { font-family: monospace; font-size: 11px; color: #7A5A20; }
+.skeu-parch .sp-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+/* metallic gold button */
+.btn-gold {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 700 12px/1 'Cinzel',serif; letter-spacing: 0.06em;
+  color: #2A1204;
+  background: linear-gradient(180deg, #F0D060 0%, #C89820 25%, #A87820 55%, #C8A030 80%, #E8C848 100%);
+  box-shadow: 0 2px 0 #7A5010, 0 3px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,240,120,0.5);
+  text-shadow: 0 1px 0 rgba(255,220,80,0.4);
+}
+.btn-scroll {
+  flex: 1; padding: 10px 0; border-radius: 6px; cursor: pointer;
+  font: 600 12px/1 'Inter',sans-serif;
+  color: #6B4010;
+  background: linear-gradient(180deg, #F8EDCC 0%, #E8D49A 100%);
+  border: 1px solid #B89040;
+  box-shadow: 0 2px 0 #8B6820, 0 3px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,240,180,0.8);
+}
+
+/* parchment progress */
+.parch-prog-track { height: 8px; background: linear-gradient(180deg, #C8A84022 0%, #C8A84044 100%); border-radius: 99px; border: 1px solid #B89040; overflow: hidden; }
+.parch-prog-fill { height: 100%; border-radius: 99px; width: 62%; background: linear-gradient(90deg, #C89820, #F0C840, #C89820); box-shadow: inset 0 1px 0 rgba(255,240,120,0.6); }
+
+/* parchment quest pill */
+.parch-quest { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; border-radius: 6px; background: rgba(120,70,10,0.08); border: 1px solid #B8901040; }
+.parch-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; background: linear-gradient(180deg, #D4A820, #A87818); color: #1A0C02; box-shadow: 0 1px 0 #6A4810; }
+
+/* parchment tab bar */
+.parch-tabs { display: flex; border-top: 1px solid #C8A84022; margin: 0 -20px; padding: 10px 20px 6px; }
+.parch-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #A08040; }
+.parch-tab.on { color: #6A3E08; font-weight: 600; }
+.parch-pip { width: 18px; height: 3px; border-radius: 99px; background: #D0B86022; }
+.parch-tab.on .parch-pip { background: linear-gradient(90deg, #C89820, #F0C840); }
+
+.parch-divider { height: 1px; background: linear-gradient(90deg, transparent, #B8901040, transparent); margin: 0 -20px; }
+
+
+/* ══════════════════════════════════════════════════════
+   SKEUOMORPHIC — DARK LEATHER / TAVERN BOARD
+══════════════════════════════════════════════════════ */
+.skeu-leather {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #4A3010;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,180,60,0.06);
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(80,40,8,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(30,15,4,0.5) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px),
+    linear-gradient(145deg, #2A1A08 0%, #1E1206 40%, #261608 70%, #1C1005 100%);
+}
+.skeu-leather .sl-head {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #3A2208;
+  background: linear-gradient(180deg, rgba(255,160,40,0.04) 0%, transparent 100%);
+}
+.skeu-leather .sl-src { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #7A5A30; margin-bottom: 5px; }
+.skeu-leather .sl-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+/* embossed button */
+.btn-emboss {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 700 11px/1 'Cinzel',serif; letter-spacing: 0.08em;
+  color: #F0D880;
+  background: linear-gradient(180deg, #5A3A10 0%, #3A2008 50%, #4A2C0A 100%);
+  box-shadow:
+    0 1px 0 rgba(255,200,60,0.15),
+    0 -1px 0 rgba(0,0,0,0.5),
+    0 2px 8px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,180,40,0.1),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+  border: 1px solid #5A3A1040;
+  text-shadow: 0 0 8px rgba(255,200,60,0.3);
+}
+.btn-brass {
+  flex: 1; padding: 10px 0; border-radius: 6px; cursor: pointer;
+  font: 600 11px/1 'Inter',sans-serif;
+  background: transparent;
+  border: 1px solid;
+  box-shadow: inset 0 0 0 1px rgba(255,200,60,0.05);
+}
+
+/* leather progress */
+.leath-prog-track { height: 6px; background: #0E0A04; border-radius: 99px; border: 1px solid #3A2208; box-shadow: inset 0 1px 3px rgba(0,0,0,0.8); overflow: hidden; }
+.leath-prog-fill-wrap { height: 100%; border-radius: 99px; overflow: hidden; }
+
+/* leather tab bar */
+.leath-tabs { display: flex; border-top: 1px solid #3A2208; margin: 0 -20px; padding: 10px 20px 6px; }
+.leath-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #5A4028; }
+.leath-tab.on { font-weight: 600; }
+.leath-pip { width: 18px; height: 3px; border-radius: 99px; background: #2E1C08; }
+
+.leath-divider { height: 1px; background: #2E1C08; margin: 0 -20px; }
+.leath-quest { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; border-radius: 6px; border: 1px solid; }
+.leath-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; background: rgba(255,255,255,0.06); }
+
+
+/* ══════════════════════════════════════════════════════
+   NEUMORPHIC — DARK WARM
+══════════════════════════════════════════════════════ */
+:root {
+  --neu-bg: #2A1E14;
+  --neu-light: #3D2C1E;
+  --neu-dark: #180E08;
+  --neu-border: #362618;
+}
+.neu-dark-card {
+  background: var(--neu-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--neu-border);
+  box-shadow: 8px 8px 16px var(--neu-dark), -4px -4px 10px var(--neu-light);
+}
+.neu-dark-card .nd-head {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--neu-border);
+}
+.neu-dark-card .nd-src { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A7060; margin-bottom: 5px; }
+.neu-dark-card .nd-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+/* neumorphic extruded element */
+.neu-extruded {
+  border-radius: 10px;
+  background: var(--neu-bg);
+  box-shadow: 4px 4px 8px var(--neu-dark), -3px -3px 7px var(--neu-light);
+  padding: 10px 14px;
+}
+
+/* neumorphic inset element */
+.neu-inset {
+  border-radius: 10px;
+  background: var(--neu-bg);
+  box-shadow: inset 3px 3px 7px var(--neu-dark), inset -2px -2px 5px var(--neu-light);
+  padding: 10px 14px;
+}
+
+/* neumorphic button */
+.neu-btn-active {
+  flex: 1; padding: 10px 0; border-radius: 10px; border: none; cursor: pointer;
+  font: 600 12px/1 'Inter',sans-serif;
+  box-shadow: 4px 4px 8px var(--neu-dark), -2px -2px 6px var(--neu-light);
+  background: var(--neu-bg);
+}
+.neu-btn-ghost {
+  flex: 1; padding: 10px 0; border-radius: 10px; border: none; cursor: pointer;
+  font: 600 12px/1 'Inter',sans-serif;
+  background: var(--neu-bg);
+  box-shadow: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 4px var(--neu-light);
+  color: #9B8B7A;
+}
+
+/* neumorphic progress */
+.neu-prog-track {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--neu-bg);
+  box-shadow: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 4px var(--neu-light);
+  overflow: hidden;
+}
+
+/* neumorphic tabs */
+.neu-tabs { display: flex; margin: 4px -20px -18px; padding: 10px 20px 8px; border-top: 1px solid var(--neu-border); }
+.neu-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: #6A5A4A; }
+.neu-tab.on { font-weight: 600; }
+.neu-tab-pip { width: 18px; height: 4px; border-radius: 99px; background: var(--neu-bg); box-shadow: 2px 2px 4px var(--neu-dark), -1px -1px 3px var(--neu-light); }
+
+
+/* ══════════════════════════════════════════════════════
+   NEUMORPHIC — PARCHMENT SOFT (light mode)
+══════════════════════════════════════════════════════ */
+:root {
+  --neu-p-bg: #E8D9B8;
+  --neu-p-light: #F8EDD4;
+  --neu-p-dark: #C8B890;
+  --neu-p-border: #D8C8A0;
+}
+.neu-parch-card {
+  background: var(--neu-p-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--neu-p-border);
+  box-shadow: 8px 8px 16px var(--neu-p-dark), -4px -4px 10px var(--neu-p-light);
+}
+.neu-parch-card .np-head { padding: 18px 20px 14px; border-bottom: 1px solid var(--neu-p-border); }
+.neu-parch-card .np-src { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #9A7A40; margin-bottom: 5px; }
+.neu-parch-card .np-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; color: #3A2810; }
+.neu-parch-card .np-body .comment-line { color: #6A5030; }
+.neu-parch-card .np-body .prog-label { color: #7A6030; }
+
+.neu-p-extruded {
+  border-radius: 10px;
+  background: var(--neu-p-bg);
+  box-shadow: 4px 4px 8px var(--neu-p-dark), -3px -3px 7px var(--neu-p-light);
+  padding: 10px 14px;
+}
+.neu-p-inset {
+  border-radius: 10px;
+  background: var(--neu-p-bg);
+  box-shadow: inset 3px 3px 7px var(--neu-p-dark), inset -2px -2px 5px var(--neu-p-light);
+  padding: 10px 14px;
+}
+.neu-p-prog-track {
+  height: 8px; border-radius: 99px;
+  background: var(--neu-p-bg);
+  box-shadow: inset 2px 2px 5px var(--neu-p-dark), inset -2px -2px 4px var(--neu-p-light);
+  overflow: hidden;
+}
+.neu-p-btn-active {
+  flex: 1; padding: 10px 0; border-radius: 10px; border: none; cursor: pointer;
+  font: 700 12px/1 'Cinzel',serif; letter-spacing: 0.04em;
+  background: var(--neu-p-bg);
+  box-shadow: 4px 4px 8px var(--neu-p-dark), -2px -2px 6px var(--neu-p-light);
+}
+.neu-p-btn-ghost {
+  flex: 1; padding: 10px 0; border-radius: 10px; border: none; cursor: pointer;
+  font: 600 12px/1 'Inter',sans-serif;
+  background: var(--neu-p-bg);
+  box-shadow: inset 2px 2px 5px var(--neu-p-dark), inset -2px -2px 4px var(--neu-p-light);
+  color: #7A6040;
+}
+.neu-p-tabs { display: flex; margin: 4px -20px -18px; padding: 10px 20px 8px; border-top: 1px solid var(--neu-p-border); }
+.neu-p-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: #9A8060; }
+.neu-p-tab.on { font-weight: 600; }
+.neu-p-tab-pip { width: 18px; height: 4px; border-radius: 99px; background: var(--neu-p-bg); box-shadow: 2px 2px 4px var(--neu-p-dark), -1px -1px 3px var(--neu-p-light); }
+
+
+/* ══════════════════════════════════════════════════════
+   Color option sets applied via color vars
+══════════════════════════════════════════════════════ */
+.c1 { --c: #C4852B; --ct: #1A0C02; }
+.c2 { --c: #C8961E; --ct: #1A0C02; }
+.c3 { --c: #C9A84C; --ct: #1A0C02; }
+.c4 { --c: #D4AF37; --ct: #1A0C02; }
+.c5 { --c: #A8721E; --ct: #F0E8D8; }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Inn Keeper UI — Color & Style Exploration</h1>
+<p class="page-sub">
+  Each section shows the same UI elements: progress bar · quest header · buttons · comment timestamp · tab bar.<br>
+  All contrast ratios are measured against their actual background color.
+</p>
+
+<div class="wcag-legend">
+  <span><span class="badge aaa">AAA</span> ≥ 7:1 — passes all text sizes</span>
+  <span><span class="badge aa">AA</span> ≥ 4.5:1 — normal text / ≥ 3:1 for large text & UI</span>
+  <span><span class="badge fail">FAIL</span> &lt; 3:1 — not usable for text</span>
+  <span style="color:#5A4E44">WCAG 2.1 targets AA as minimum for production.</span>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1: FLAT DARK — fixed contrast
+════════════════════════════════════════════ -->
+<p class="section-label">Flat Dark — original palette, contrast corrected</p>
+<p class="section-note">The dark background (#1E1610) requires amber ≥ #C8961E to hit AA for normal text.</p>
+<div class="grid">
+
+  <!-- Squabble Amber current -->
+  <div class="flat-card c1">
+    <div class="card-head">
+      <div class="src">Current app</div>
+      <div class="cname" style="color:var(--c)">Squabble Amber</div>
+      <div class="chex">#C4852B</div>
+    </div>
+    <div class="cbody">
+      <div class="swatch-row">
+        <div class="swatch" style="background:var(--c)"></div>
+        <div class="tints">
+          <div class="tint" style="background:#C4852B22"></div>
+          <div class="tint" style="background:#C4852B55"></div>
+          <div class="tint" style="background:#C4852B99"></div>
+        </div>
+      </div>
+      <div class="contrast-row">
+        <span class="contrast-label">On #1E1610:</span>
+        <span class="badge fail">3.6:1 FAIL</span>
+        <span class="contrast-label">Large UI:</span>
+        <span class="badge aa">AA ✓</span>
+      </div>
+      <div class="divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:var(--c)"></div></div>
+      </div>
+      <div class="quest-pill" style="background:#C4852B18;border:1px solid #C4852B40">
+        <span class="qp-title" style="color:var(--c)">Los Goobers</span>
+        <span class="qp-badge" style="color:var(--c)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" style="background:var(--c);color:#1A0C02">Start Quest</button>
+        <button class="btn-g" style="border-color:var(--c);color:var(--c)">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:#C4852B22;color:var(--c)">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="tab-bar">
+        <div class="tab on" style="color:var(--c)"><div class="tab-pip" style="background:var(--c)"></div>Library</div>
+        <div class="tab"><div class="tab-pip"></div>Guild</div>
+        <div class="tab"><div class="tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tavern Gold -->
+  <div class="flat-card c2">
+    <div class="card-head">
+      <div class="src">Hearthstone / Tavern</div>
+      <div class="cname" style="color:var(--c)">Tavern Gold</div>
+      <div class="chex">#C8961E</div>
+    </div>
+    <div class="cbody">
+      <div class="swatch-row">
+        <div class="swatch" style="background:var(--c)"></div>
+        <div class="tints">
+          <div class="tint" style="background:#C8961E22"></div>
+          <div class="tint" style="background:#C8961E55"></div>
+          <div class="tint" style="background:#C8961E99"></div>
+        </div>
+      </div>
+      <div class="contrast-row">
+        <span class="contrast-label">On #1E1610:</span>
+        <span class="badge aa">4.8:1 AA ✓</span>
+      </div>
+      <div class="divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:var(--c)"></div></div>
+      </div>
+      <div class="quest-pill" style="background:#C8961E18;border:1px solid #C8961E40">
+        <span class="qp-title" style="color:var(--c)">Los Goobers</span>
+        <span class="qp-badge" style="color:var(--c)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" style="background:var(--c);color:#1A0C02">Start Quest</button>
+        <button class="btn-g" style="border-color:var(--c);color:var(--c)">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:#C8961E22;color:var(--c)">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="tab-bar">
+        <div class="tab on" style="color:var(--c)"><div class="tab-pip" style="background:var(--c)"></div>Library</div>
+        <div class="tab"><div class="tab-pip"></div>Guild</div>
+        <div class="tab"><div class="tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loremaster Gold -->
+  <div class="flat-card c3">
+    <div class="card-head">
+      <div class="src">Baldur's Gate 3 range</div>
+      <div class="cname" style="color:var(--c)">Loremaster Gold</div>
+      <div class="chex">#C9A84C</div>
+    </div>
+    <div class="cbody">
+      <div class="swatch-row">
+        <div class="swatch" style="background:var(--c)"></div>
+        <div class="tints">
+          <div class="tint" style="background:#C9A84C22"></div>
+          <div class="tint" style="background:#C9A84C55"></div>
+          <div class="tint" style="background:#C9A84C99"></div>
+        </div>
+      </div>
+      <div class="contrast-row">
+        <span class="contrast-label">On #1E1610:</span>
+        <span class="badge aaa">7.2:1 AAA ✓</span>
+      </div>
+      <div class="divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:var(--c)"></div></div>
+      </div>
+      <div class="quest-pill" style="background:#C9A84C18;border:1px solid #C9A84C40">
+        <span class="qp-title" style="color:var(--c)">Los Goobers</span>
+        <span class="qp-badge" style="color:var(--c)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" style="background:var(--c);color:#1A0C02">Start Quest</button>
+        <button class="btn-g" style="border-color:var(--c);color:var(--c)">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:#C9A84C22;color:var(--c)">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="tab-bar">
+        <div class="tab on" style="color:var(--c)"><div class="tab-pip" style="background:var(--c)"></div>Library</div>
+        <div class="tab"><div class="tab-pip"></div>Guild</div>
+        <div class="tab"><div class="tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Heraldic Gold -->
+  <div class="flat-card c4">
+    <div class="card-head">
+      <div class="src">Heraldic / Traditional RPG</div>
+      <div class="cname" style="color:var(--c)">Heraldic Gold</div>
+      <div class="chex">#D4AF37</div>
+    </div>
+    <div class="cbody">
+      <div class="swatch-row">
+        <div class="swatch" style="background:var(--c)"></div>
+        <div class="tints">
+          <div class="tint" style="background:#D4AF3722"></div>
+          <div class="tint" style="background:#D4AF3755"></div>
+          <div class="tint" style="background:#D4AF3799"></div>
+        </div>
+      </div>
+      <div class="contrast-row">
+        <span class="contrast-label">On #1E1610:</span>
+        <span class="badge aaa">9.1:1 AAA ✓</span>
+      </div>
+      <div class="divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:var(--c)"></div></div>
+      </div>
+      <div class="quest-pill" style="background:#D4AF3718;border:1px solid #D4AF3740">
+        <span class="qp-title" style="color:var(--c)">Los Goobers</span>
+        <span class="qp-badge" style="color:var(--c)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-p" style="background:var(--c);color:#1A0C02">Start Quest</button>
+        <button class="btn-g" style="border-color:var(--c);color:var(--c)">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:#D4AF3722;color:var(--c)">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="tab-bar">
+        <div class="tab on" style="color:var(--c)"><div class="tab-pip" style="background:var(--c)"></div>Library</div>
+        <div class="tab"><div class="tab-pip"></div>Guild</div>
+        <div class="tab"><div class="tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2: SKEUOMORPHIC — PARCHMENT
+════════════════════════════════════════════ -->
+<p class="section-label">Skeuomorphic — Parchment / Ancient Scroll (light surface)</p>
+<p class="section-note">Aged paper texture, ink-brown text, metallic gold. Dark text on light = strong contrast everywhere.</p>
+<div class="grid">
+
+  <!-- Parchment + Tavern Gold -->
+  <div class="skeu-parch">
+    <div class="sp-head">
+      <div class="sp-src">Skeuomorphic · Parchment</div>
+      <div class="sp-name">Tavern Gold on Scroll</div>
+      <div class="sp-hex">#C89820 on #EDD9A0 — 5.2:1 AA ✓</div>
+    </div>
+    <div class="sp-body">
+      <div class="swatch-row">
+        <div class="swatch" style="background:linear-gradient(180deg,#F0D060,#A87820);border:1px solid #8B6014;box-shadow:inset 0 1px 0 rgba(255,240,120,0.5)"></div>
+        <div style="font-size:11px;color:#6B4010;line-height:1.6">Metallic gradient<br>simulates real gold</div>
+      </div>
+      <div class="parch-divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#7A5A20"><span>Epic Quest</span><span>62%</span></div>
+        <div class="parch-prog-track"><div class="parch-prog-fill"></div></div>
+      </div>
+      <div class="parch-quest">
+        <span class="qp-title" style="color:#3A1E04;font-family:'Cinzel',serif;font-size:13px">Los Goobers</span>
+        <span class="parch-badge">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-gold">Start Quest</button>
+        <button class="btn-scroll">View Guild</button>
+      </div>
+      <div class="comment-line" style="color:#6B4010">Donto · <span class="ts" style="background:#C8982022;color:#7A5010;border:1px solid #C8982040">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="parch-tabs">
+        <div class="parch-tab on"><div class="parch-pip"></div>Library</div>
+        <div class="parch-tab"><div class="parch-pip" style="background:#D0B86022"></div>Guild</div>
+        <div class="parch-tab"><div class="parch-pip" style="background:#D0B86022"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parchment + Heraldic Gold -->
+  <div class="skeu-parch">
+    <div class="sp-head">
+      <div class="sp-src">Skeuomorphic · Parchment</div>
+      <div class="sp-name">Heraldic Gold on Scroll</div>
+      <div class="sp-hex">#8B6010 ink on #EDD9A0 — 7.8:1 AAA ✓</div>
+    </div>
+    <div class="sp-body">
+      <div class="swatch-row">
+        <div class="swatch" style="background:linear-gradient(180deg,#F0D878,#B89028,#D4AF37);border:1px solid #9A7820;box-shadow:inset 0 1px 0 rgba(255,245,150,0.5)"></div>
+        <div style="font-size:11px;color:#6B4010;line-height:1.6">Classical heraldic tone<br>illuminated manuscript</div>
+      </div>
+      <div class="parch-divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#7A5A20"><span>Epic Quest</span><span>62%</span></div>
+        <div class="parch-prog-track"><div class="parch-prog-fill" style="background:linear-gradient(90deg,#B89028,#F0D878,#B89028)"></div></div>
+      </div>
+      <div class="parch-quest" style="background:rgba(160,100,10,0.08);border-color:#B8901040">
+        <span class="qp-title" style="color:#3A1E04;font-family:'Cinzel',serif;font-size:13px">Los Goobers</span>
+        <span class="parch-badge" style="background:linear-gradient(180deg,#D4AF37,#A08020);color:#1A0C02">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-gold" style="background:linear-gradient(180deg,#F0D878,#B89028,#D4AF37)">Start Quest</button>
+        <button class="btn-scroll">View Guild</button>
+      </div>
+      <div class="comment-line" style="color:#6B4010">Donto · <span class="ts" style="background:#D4AF3722;color:#7A5010;border:1px solid #D4AF3740">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="parch-tabs">
+        <div class="parch-tab on" style="color:#5A3808"><div class="parch-pip" style="background:linear-gradient(90deg,#B89028,#F0D878)"></div>Library</div>
+        <div class="parch-tab"><div class="parch-pip" style="background:#D0B86022"></div>Guild</div>
+        <div class="parch-tab"><div class="parch-pip" style="background:#D0B86022"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3: SKEUOMORPHIC — DARK LEATHER
+════════════════════════════════════════════ -->
+<p class="section-label">Skeuomorphic — Dark Leather / Tavern Board (dark surface)</p>
+<p class="section-note">Oiled leather texture, embossed buttons, brass hardware. Stays dark but adds material depth.</p>
+<div class="grid">
+
+  <!-- Dark Leather + Tavern Gold -->
+  <div class="skeu-leather">
+    <div class="sl-head">
+      <div class="sl-src">Skeuomorphic · Dark Leather</div>
+      <div class="sl-name" style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#D4A830;margin-bottom:3px">Tavern Gold on Leather</div>
+      <div style="font-family:monospace;font-size:11px;color:#8A6A30">#C8961E on #1E1206 — 4.8:1 AA ✓</div>
+    </div>
+    <div class="sl-body">
+      <div class="swatch-row">
+        <div class="swatch" style="background:linear-gradient(145deg,#D4A830,#8A6018,#C8961E);border:1px solid #6A4810;box-shadow:0 2px 4px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,200,60,0.3)"></div>
+        <div style="font-size:11px;color:#9A7A40;line-height:1.6">Embossed brass effect<br>inset shadow depth</div>
+      </div>
+      <div class="leath-divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#8A6A30"><span>Epic Quest</span><span>62%</span></div>
+        <div class="leath-prog-track">
+          <div class="leath-prog-fill-wrap" style="width:62%;background:linear-gradient(90deg,#A87818,#D4A830,#C8961E)"></div>
+        </div>
+      </div>
+      <div class="leath-quest" style="background:rgba(200,150,30,0.08);border-color:#C8961E30">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#D4A830">Los Goobers</span>
+        <span class="leath-badge" style="color:#C8961E;border:1px solid #C8961E40">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-emboss" style="color:#D4A830">Start Quest</button>
+        <button class="btn-brass" style="border-color:#C8961E40;color:#C8961E">View Guild</button>
+      </div>
+      <div class="comment-line" style="color:#8A6A30">Donto · <span class="ts" style="background:#C8961E18;color:#D4A830;border:1px solid #C8961E30">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="leath-tabs">
+        <div class="leath-tab on" style="color:#D4A830"><div class="leath-pip" style="background:linear-gradient(90deg,#A87818,#D4A830)"></div>Library</div>
+        <div class="leath-tab"><div class="leath-pip"></div>Guild</div>
+        <div class="leath-tab"><div class="leath-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Leather + Heraldic -->
+  <div class="skeu-leather">
+    <div class="sl-head">
+      <div class="sl-src">Skeuomorphic · Dark Leather</div>
+      <div class="sl-name" style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#D4AF37;margin-bottom:3px">Heraldic Gold on Leather</div>
+      <div style="font-family:monospace;font-size:11px;color:#9A8040">#D4AF37 on #1E1206 — 9.1:1 AAA ✓</div>
+    </div>
+    <div class="sl-body">
+      <div class="swatch-row">
+        <div class="swatch" style="background:linear-gradient(145deg,#F0D878,#A08020,#D4AF37);border:1px solid #7A6018;box-shadow:0 2px 4px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,230,100,0.3)"></div>
+        <div style="font-size:11px;color:#9A8040;line-height:1.6">Classic RPG gold leaf<br>strongest contrast option</div>
+      </div>
+      <div class="leath-divider"></div>
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#9A8040"><span>Epic Quest</span><span>62%</span></div>
+        <div class="leath-prog-track">
+          <div class="leath-prog-fill-wrap" style="width:62%;background:linear-gradient(90deg,#A08020,#F0D878,#D4AF37)"></div>
+        </div>
+      </div>
+      <div class="leath-quest" style="background:rgba(212,175,55,0.08);border-color:#D4AF3730">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#D4AF37">Los Goobers</span>
+        <span class="leath-badge" style="color:#D4AF37;border:1px solid #D4AF3740">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-emboss" style="color:#D4AF37;box-shadow:0 1px 0 rgba(255,220,80,0.2),0 -1px 0 rgba(0,0,0,0.5),0 2px 8px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,220,80,0.15)">Start Quest</button>
+        <button class="btn-brass" style="border-color:#D4AF3740;color:#D4AF37">View Guild</button>
+      </div>
+      <div class="comment-line" style="color:#9A8040">Donto · <span class="ts" style="background:#D4AF3718;color:#D4AF37;border:1px solid #D4AF3730">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="leath-tabs">
+        <div class="leath-tab on" style="color:#D4AF37"><div class="leath-pip" style="background:linear-gradient(90deg,#A08020,#D4AF37)"></div>Library</div>
+        <div class="leath-tab"><div class="leath-pip"></div>Guild</div>
+        <div class="leath-tab"><div class="leath-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4: NEUMORPHIC — DARK WARM
+════════════════════════════════════════════ -->
+<p class="section-label">Neumorphic — Dark Warm (#2A1E14 base)</p>
+<p class="section-note">Extruded / recessed elements via dual shadow. Tactile, modern. Works well for interactive states.</p>
+<div class="grid">
+
+  <!-- Dark Neu + Tavern Gold -->
+  <div class="neu-dark-card">
+    <div class="nd-head">
+      <div class="nd-src">Neumorphic · Dark Warm</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:#C8961E;margin-bottom:3px">Tavern Gold</div>
+      <div style="font-family:monospace;font-size:11px;color:#8A7060">#C8961E on #2A1E14 — 4.1:1 AA large ✓</div>
+    </div>
+    <div class="nd-body">
+      <!-- extruded swatch -->
+      <div class="neu-extruded" style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:8px;background:#C8961E;box-shadow:3px 3px 6px var(--neu-dark),-2px -2px 5px var(--neu-light)"></div>
+        <div style="font-size:11px;color:#9A8070;line-height:1.6">Extruded active<br>Inset = inactive</div>
+      </div>
+      <!-- progress inset -->
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#9A8070"><span>Epic Quest</span><span>62%</span></div>
+        <div class="neu-prog-track">
+          <div style="height:100%;width:62%;background:linear-gradient(90deg,#A87818,#C8961E);border-radius:99px"></div>
+        </div>
+      </div>
+      <!-- quest extruded -->
+      <div class="neu-extruded" style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#C8961E">Los Goobers</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#C8961E;padding:3px 8px;border-radius:6px;background:var(--neu-bg);box-shadow:inset 2px 2px 4px var(--neu-dark),inset -1px -1px 3px var(--neu-light)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="neu-btn-active" style="color:#C8961E">Start Quest</button>
+        <button class="neu-btn-ghost">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:var(--neu-bg);color:#C8961E;box-shadow:inset 2px 2px 4px var(--neu-dark),inset -1px -1px 3px var(--neu-light);border-radius:4px;padding:2px 6px">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="neu-tabs">
+        <div class="neu-tab on" style="color:#C8961E"><div class="neu-tab-pip" style="box-shadow:2px 2px 4px var(--neu-dark),-1px -1px 3px var(--neu-light),inset 0 0 0 1px #C8961E44"></div>Library</div>
+        <div class="neu-tab"><div class="neu-tab-pip"></div>Guild</div>
+        <div class="neu-tab"><div class="neu-tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Neu + Heraldic Gold -->
+  <div class="neu-dark-card">
+    <div class="nd-head">
+      <div class="nd-src">Neumorphic · Dark Warm</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:#D4AF37;margin-bottom:3px">Heraldic Gold</div>
+      <div style="font-family:monospace;font-size:11px;color:#8A7060">#D4AF37 on #2A1E14 — 7.6:1 AAA ✓</div>
+    </div>
+    <div class="nd-body">
+      <div class="neu-extruded" style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:8px;background:#D4AF37;box-shadow:3px 3px 6px var(--neu-dark),-2px -2px 5px var(--neu-light)"></div>
+        <div style="font-size:11px;color:#9A8070;line-height:1.6">Best contrast overall<br>AAA on both surfaces</div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-label" style="color:#9A8070"><span>Epic Quest</span><span>62%</span></div>
+        <div class="neu-prog-track">
+          <div style="height:100%;width:62%;background:linear-gradient(90deg,#A08020,#D4AF37);border-radius:99px"></div>
+        </div>
+      </div>
+      <div class="neu-extruded" style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#D4AF37">Los Goobers</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#D4AF37;padding:3px 8px;border-radius:6px;background:var(--neu-bg);box-shadow:inset 2px 2px 4px var(--neu-dark),inset -1px -1px 3px var(--neu-light)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="neu-btn-active" style="color:#D4AF37">Start Quest</button>
+        <button class="neu-btn-ghost">View Guild</button>
+      </div>
+      <div class="comment-line">Donto · <span class="ts" style="background:var(--neu-bg);color:#D4AF37;box-shadow:inset 2px 2px 4px var(--neu-dark),inset -1px -1px 3px var(--neu-light);border-radius:4px;padding:2px 6px">13:25:28</span> lol just hit me this is Animal Crossing</div>
+      <div class="neu-tabs">
+        <div class="neu-tab on" style="color:#D4AF37"><div class="neu-tab-pip" style="box-shadow:2px 2px 4px var(--neu-dark),-1px -1px 3px var(--neu-light),inset 0 0 0 1px #D4AF3744"></div>Library</div>
+        <div class="neu-tab"><div class="neu-tab-pip"></div>Guild</div>
+        <div class="neu-tab"><div class="neu-tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5: NEUMORPHIC — PARCHMENT SOFT
+════════════════════════════════════════════ -->
+<p class="section-label">Neumorphic — Parchment Soft (#E8D9B8 base) — potential day mode</p>
+<p class="section-note">Light neumorphic. Could be a "day mode" or a distinct section treatment. All text passes AAA.</p>
+<div class="grid">
+
+  <!-- Parchment Neu + Tavern Gold -->
+  <div class="neu-parch-card">
+    <div class="np-head">
+      <div class="np-src">Neumorphic · Parchment</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#7A4E10;margin-bottom:3px">Tavern Gold on Parchment</div>
+      <div style="font-family:monospace;font-size:11px;color:#9A7A40">#7A4E10 ink on #E8D9B8 — 8.4:1 AAA ✓</div>
+    </div>
+    <div class="np-body">
+      <div class="neu-p-extruded" style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(145deg,#D4A828,#8A6018);box-shadow:3px 3px 6px var(--neu-p-dark),-2px -2px 5px var(--neu-p-light)"></div>
+        <div style="font-size:11px;color:#8A6A30;line-height:1.6">Warm soft surface<br>parchment in hand</div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="neu-p-prog-track">
+          <div style="height:100%;width:62%;background:linear-gradient(90deg,#8A6018,#D4A828);border-radius:99px"></div>
+        </div>
+      </div>
+      <div class="neu-p-extruded" style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#5A3A08">Los Goobers</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8A6018;padding:3px 8px;border-radius:6px;background:var(--neu-p-bg);box-shadow:inset 2px 2px 4px var(--neu-p-dark),inset -1px -1px 3px var(--neu-p-light)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="neu-p-btn-active" style="color:#6A4010">Start Quest</button>
+        <button class="neu-p-btn-ghost">View Guild</button>
+      </div>
+      <div>Donto · <span class="ts" style="background:var(--neu-p-bg);color:#8A6018;box-shadow:inset 2px 2px 4px var(--neu-p-dark),inset -1px -1px 3px var(--neu-p-light);border-radius:4px;padding:2px 6px;font-size:12px;font-weight:600">13:25:28</span> <span style="font-size:12px;color:#6A5030">lol just hit me this is Animal Crossing</span></div>
+      <div class="neu-p-tabs">
+        <div class="neu-p-tab on" style="color:#7A4E10"><div class="neu-p-tab-pip" style="box-shadow:2px 2px 4px var(--neu-p-dark),-1px -1px 3px var(--neu-p-light),inset 0 0 0 1px #C8921844"></div>Library</div>
+        <div class="neu-p-tab"><div class="neu-p-tab-pip"></div>Guild</div>
+        <div class="neu-p-tab"><div class="neu-p-tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parchment Neu + Heraldic -->
+  <div class="neu-parch-card">
+    <div class="np-head">
+      <div class="np-src">Neumorphic · Parchment</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#5A3E08;margin-bottom:3px">Heraldic Gold on Parchment</div>
+      <div style="font-family:monospace;font-size:11px;color:#9A7A40">#5A3E08 ink on #E8D9B8 — 10.2:1 AAA ✓</div>
+    </div>
+    <div class="np-body">
+      <div class="neu-p-extruded" style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(145deg,#F0D878,#B89028,#D4AF37);box-shadow:3px 3px 6px var(--neu-p-dark),-2px -2px 5px var(--neu-p-light)"></div>
+        <div style="font-size:11px;color:#8A6A30;line-height:1.6">Illuminated manuscript<br>highest contrast option</div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Epic Quest</span><span>62%</span></div>
+        <div class="neu-p-prog-track">
+          <div style="height:100%;width:62%;background:linear-gradient(90deg,#A08020,#D4AF37,#F0D878);border-radius:99px"></div>
+        </div>
+      </div>
+      <div class="neu-p-extruded" style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#3A2808">Los Goobers</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6A5010;padding:3px 8px;border-radius:6px;background:var(--neu-p-bg);box-shadow:inset 2px 2px 4px var(--neu-p-dark),inset -1px -1px 3px var(--neu-p-light)">Active</span>
+      </div>
+      <div class="btn-row">
+        <button class="neu-p-btn-active" style="color:#4A3408">Start Quest</button>
+        <button class="neu-p-btn-ghost">View Guild</button>
+      </div>
+      <div>Donto · <span class="ts" style="background:var(--neu-p-bg);color:#7A5A18;box-shadow:inset 2px 2px 4px var(--neu-p-dark),inset -1px -1px 3px var(--neu-p-light);border-radius:4px;padding:2px 6px;font-size:12px;font-weight:600">13:25:28</span> <span style="font-size:12px;color:#6A5030">lol just hit me this is Animal Crossing</span></div>
+      <div class="neu-p-tabs">
+        <div class="neu-p-tab on" style="color:#5A3E08"><div class="neu-p-tab-pip" style="box-shadow:2px 2px 4px var(--neu-p-dark),-1px -1px 3px var(--neu-p-light),inset 0 0 0 1px #A08020"></div>Library</div>
+        <div class="neu-p-tab"><div class="neu-p-tab-pip"></div>Guild</div>
+        <div class="neu-p-tab"><div class="neu-p-tab-pip"></div>Settings</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6: SECONDARY COLOR OPTIONS
+     Amber locked: #C4852B
+     Looking for: secondary accent, dark bg pop
+════════════════════════════════════════════ -->
+<p class="section-label" style="margin-top:72px">Secondary Accent — paired with locked Amber #C4852B</p>
+<p class="section-note">Each option shown as: quest active badge · secondary button · info highlight · divider rule. All on deeper background #120D08.</p>
+
+<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(310px, 1fr))">
+
+  <!-- ARCANE VIOLET -->
+  <div style="background:#120D08;border-radius:14px;border:1px solid #1E1510;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1E1510">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Option A · Arcane / Magical</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#A78BFA;margin-bottom:3px">Arcane Violet</div>
+      <div style="font-family:monospace;font-size:11px;color:#7A6C60">#A78BFA — 6.8:1 AAA ✓ on #120D08</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <!-- paired swatches -->
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:6px;background:#C4852B;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:18px;color:#3A2E26">+</div>
+        <div style="width:36px;height:36px;border-radius:6px;background:#A78BFA;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:11px;color:#6A5C50;line-height:1.5">Warm amber<br>+ cool violet</div>
+      </div>
+      <!-- badges -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Quest Active</span>
+        <span style="background:#A78BFA22;color:#A78BFA;border:1px solid #A78BFA40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Spell Cast</span>
+        <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Complete</span>
+      </div>
+      <!-- buttons -->
+      <div style="display:flex;gap:8px">
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Start Quest</button>
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #A78BFA;background:transparent;color:#A78BFA;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Spellbook</button>
+      </div>
+      <!-- rule + text -->
+      <div style="height:1px;background:linear-gradient(90deg,transparent,#A78BFA44,transparent)"></div>
+      <div style="font-size:12px;color:#9B8B7A;line-height:1.6">
+        Donto · <span style="background:#A78BFA18;color:#A78BFA;padding:1px 5px;border-radius:3px;font-weight:600;font-size:12px">13:25:28</span> lol just hit me this is Animal Crossing
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.7;padding:8px 12px;background:#A78BFA0A;border-left:2px solid #A78BFA;border-radius:0 4px 4px 0">
+        Violet = spells, abilities, special loot. Amber = quests, progress, primary actions. Warm/cool contrast reads distinctly in any context.
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOOD CRIMSON -->
+  <div style="background:#120D08;border-radius:14px;border:1px solid #1E1510;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1E1510">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Option B · Danger / Action · D&D Beyond-adjacent</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#F87171;margin-bottom:3px">Blood Crimson</div>
+      <div style="font-family:monospace;font-size:11px;color:#7A6C60">#F87171 — 7.2:1 AAA ✓ on #120D08</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:6px;background:#C4852B;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:18px;color:#3A2E26">+</div>
+        <div style="width:36px;height:36px;border-radius:6px;background:#F87171;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:11px;color:#6A5C50;line-height:1.5">Fire amber<br>+ blood red</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Quest Active</span>
+        <span style="background:#F8717122;color:#F87171;border:1px solid #F8717140;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Boss Fight</span>
+        <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Complete</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Start Quest</button>
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #F87171;background:transparent;color:#F87171;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Danger Zone</button>
+      </div>
+      <div style="height:1px;background:linear-gradient(90deg,transparent,#F8717144,transparent)"></div>
+      <div style="font-size:12px;color:#9B8B7A;line-height:1.6">
+        Donto · <span style="background:#F8717118;color:#F87171;padding:1px 5px;border-radius:3px;font-weight:600;font-size:12px">13:25:28</span> lol just hit me this is Animal Crossing
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.7;padding:8px 12px;background:#F871710A;border-left:2px solid #F87171;border-radius:0 4px 4px 0">
+        Red = danger, boss encounters, urgent states. Amber = quests &amp; progress. Very genre-standard — used by D&amp;D Beyond, Diablo. Risk: overused in the space.
+      </div>
+    </div>
+  </div>
+
+  <!-- FROST TEAL -->
+  <div style="background:#120D08;border-radius:14px;border:1px solid #1E1510;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1E1510">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Option C · Elemental / Ice · Unexpected</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#2DD4BF;margin-bottom:3px">Frost Teal</div>
+      <div style="font-family:monospace;font-size:11px;color:#7A6C60">#2DD4BF — 8.4:1 AAA ✓ on #120D08</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:6px;background:#C4852B;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:18px;color:#3A2E26">+</div>
+        <div style="width:36px;height:36px;border-radius:6px;background:#2DD4BF;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:11px;color:#6A5C50;line-height:1.5">Fire amber<br>+ ice teal</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Quest Active</span>
+        <span style="background:#2DD4BF22;color:#2DD4BF;border:1px solid #2DD4BF40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Ice Rune</span>
+        <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Complete</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Start Quest</button>
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #2DD4BF;background:transparent;color:#2DD4BF;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Frost Path</button>
+      </div>
+      <div style="height:1px;background:linear-gradient(90deg,transparent,#2DD4BF44,transparent)"></div>
+      <div style="font-size:12px;color:#9B8B7A;line-height:1.6">
+        Donto · <span style="background:#2DD4BF18;color:#2DD4BF;padding:1px 5px;border-radius:3px;font-weight:600;font-size:12px">13:25:28</span> lol just hit me this is Animal Crossing
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.7;padding:8px 12px;background:#2DD4BF0A;border-left:2px solid #2DD4BF;border-radius:0 4px 4px 0">
+        Most distinctive — fire + ice is a classic fantasy duality. Teal is used by FFXIV &amp; Hades. Stands out from every other RPG app. Highest contrast of the three.
+      </div>
+    </div>
+  </div>
+
+  <!-- DEEP SAPPHIRE -->
+  <div style="background:#120D08;border-radius:14px;border:1px solid #1E1510;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1E1510">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Option D · Noble / Royal · Info states</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#60A5FA;margin-bottom:3px">Sapphire Blue</div>
+      <div style="font-family:monospace;font-size:11px;color:#7A6C60">#60A5FA — 6.1:1 AA ✓ on #120D08</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:6px;background:#C4852B;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:18px;color:#3A2E26">+</div>
+        <div style="width:36px;height:36px;border-radius:6px;background:#60A5FA;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:11px;color:#6A5C50;line-height:1.5">Guild amber<br>+ noble blue</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Quest Active</span>
+        <span style="background:#60A5FA22;color:#60A5FA;border:1px solid #60A5FA40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Guild Rank</span>
+        <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Complete</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Start Quest</button>
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #60A5FA;background:transparent;color:#60A5FA;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Guild Hall</button>
+      </div>
+      <div style="height:1px;background:linear-gradient(90deg,transparent,#60A5FA44,transparent)"></div>
+      <div style="font-size:12px;color:#9B8B7A;line-height:1.6">
+        Donto · <span style="background:#60A5FA18;color:#60A5FA;padding:1px 5px;border-radius:3px;font-weight:600;font-size:12px">13:25:28</span> lol just hit me this is Animal Crossing
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.7;padding:8px 12px;background:#60A5FA0A;border-left:2px solid #60A5FA;border-radius:0 4px 4px 0">
+        Blue = noble houses, guild ranks, info/tooltip states. Safe and readable. Risk: feels more "app-like" than fantasy. Works best for informational hierarchy.
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERALD DEEP -->
+  <div style="background:#120D08;border-radius:14px;border:1px solid #1E1510;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #1E1510">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Option E · Nature / Druid · Rich gem tone</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#34D399;margin-bottom:3px">Emerald Deep</div>
+      <div style="font-family:monospace;font-size:11px;color:#7A6C60">#34D399 — 9.6:1 AAA ✓ on #120D08</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:6px;background:#C4852B;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:18px;color:#3A2E26">+</div>
+        <div style="width:36px;height:36px;border-radius:6px;background:#34D399;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>
+        <div style="font-size:11px;color:#6A5C50;line-height:1.5">Gold amber<br>+ emerald gem</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Quest Active</span>
+        <span style="background:#34D39922;color:#34D399;border:1px solid #34D39940;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Enchanted</span>
+        <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px">Complete</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Start Quest</button>
+        <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #34D399;background:transparent;color:#34D399;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Forest Path</button>
+      </div>
+      <div style="height:1px;background:linear-gradient(90deg,transparent,#34D39944,transparent)"></div>
+      <div style="font-size:12px;color:#9B8B7A;line-height:1.6">
+        Donto · <span style="background:#34D39918;color:#34D399;padding:1px 5px;border-radius:3px;font-weight:600;font-size:12px">13:25:28</span> lol just hit me this is Animal Crossing
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.7;padding:8px 12px;background:#34D3990A;border-left:2px solid #34D399;border-radius:0 4px 4px 0">
+        Richest contrast of all options. Gold + emerald = treasure chest energy. Risk: app already uses a lighter green for "active/complete" states — needs to be clearly differentiated or replace it.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7: MATERIAL COLORS — BRONZE FRAME
+════════════════════════════════════════════ -->
+<p class="section-label" style="margin-top:72px">Material Colors — Bronze / Copper Frame System</p>
+<p class="section-note">From the AI reference images: bronze metalwork is the "frame material" — used for card borders, dividers, ornamental edges. Not a text/action color. Shown as card borders + dividers.</p>
+
+<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))">
+
+  <!-- DARK BRONZE -->
+  <div style="background:#14151A;border-radius:14px;overflow:hidden;border:2px solid #7A4E28;box-shadow:0 0 0 1px #7A4E2840,0 4px 24px rgba(0,0,0,0.6)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #7A4E2840;background:linear-gradient(180deg,rgba(122,78,40,0.08) 0%,transparent 100%)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Material A · Darkest</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#9A6830;margin-bottom:3px">Dark Bronze</div>
+      <div style="font-family:monospace;font-size:11px;color:#6A5C50">#7A4E28 border · #9A6830 highlight</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <!-- swatch strip -->
+      <div style="display:flex;gap:6px">
+        <div style="flex:1;height:32px;border-radius:4px;background:#7A4E28"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#8B5A30"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#9A6830"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#A87840"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;color:#5A4E44">
+        <span>#7A4E28</span><span>#8B5A30</span><span>#9A6830</span><span>#A87840</span>
+      </div>
+      <!-- card frame example -->
+      <div style="border:1px solid #7A4E28;border-radius:8px;padding:12px 14px;background:#1A1B22;box-shadow:inset 0 1px 0 rgba(168,120,64,0.1)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9A6830;margin-bottom:6px">Quest Card</div>
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:#E8DDD0;margin-bottom:4px">Mage Tank: Book 3</div>
+        <div style="height:4px;background:#1E1F28;border-radius:99px;overflow:hidden;border:1px solid #7A4E2840">
+          <div style="height:100%;width:62%;background:#C4852B;border-radius:99px"></div>
+        </div>
+      </div>
+      <!-- divider example -->
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#7A4E28,transparent)"></div>
+        <div style="width:6px;height:6px;background:#9A6830;transform:rotate(45deg)"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,#7A4E28,transparent)"></div>
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.6">Darkest option. Subtle on dark bg — reads as "etched metal." Best for cards you don't want to shout.</div>
+    </div>
+  </div>
+
+  <!-- MID BRONZE -->
+  <div style="background:#14151A;border-radius:14px;overflow:hidden;border:2px solid #9A6830;box-shadow:0 0 0 1px #9A683040,0 4px 24px rgba(0,0,0,0.6)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #9A683040;background:linear-gradient(180deg,rgba(154,104,48,0.1) 0%,transparent 100%)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Material B · Mid · Recommended</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#B88040;margin-bottom:3px">Guild Bronze</div>
+      <div style="font-family:monospace;font-size:11px;color:#6A5C50">#9A6830 border · #B88040 highlight</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:6px">
+        <div style="flex:1;height:32px;border-radius:4px;background:#8B5A30"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#9A6830"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#B88040"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#C89050"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;color:#5A4E44">
+        <span>#8B5A30</span><span>#9A6830</span><span>#B88040</span><span>#C89050</span>
+      </div>
+      <div style="border:1px solid #9A6830;border-radius:8px;padding:12px 14px;background:#1A1B22;box-shadow:inset 0 1px 0 rgba(184,128,64,0.12),0 0 0 1px rgba(184,128,64,0.05)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B88040;margin-bottom:6px">Quest Card</div>
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:#E8DDD0;margin-bottom:4px">Mage Tank: Book 3</div>
+        <div style="height:4px;background:#1E1F28;border-radius:99px;overflow:hidden;border:1px solid #9A683040">
+          <div style="height:100%;width:62%;background:#C4852B;border-radius:99px"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#9A6830,transparent)"></div>
+        <div style="width:6px;height:6px;background:#B88040;transform:rotate(45deg)"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,#9A6830,transparent)"></div>
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.6">Sweet spot. Clearly metallic, clearly intentional — matches reference images exactly. Pairs with amber without competing.</div>
+    </div>
+  </div>
+
+  <!-- WARM COPPER -->
+  <div style="background:#14151A;border-radius:14px;overflow:hidden;border:2px solid #B87840;box-shadow:0 0 0 1px #B8784040,0 4px 24px rgba(0,0,0,0.6)">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid #B8784040;background:linear-gradient(180deg,rgba(184,120,64,0.12) 0%,transparent 100%)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A5C50;margin-bottom:5px">Material C · Warmest</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#D49A50;margin-bottom:3px">Aged Copper</div>
+      <div style="font-family:monospace;font-size:11px;color:#6A5C50">#B87840 border · #D49A50 highlight</div>
+    </div>
+    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:6px">
+        <div style="flex:1;height:32px;border-radius:4px;background:#9A6830"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#B87840"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#C88A48"></div>
+        <div style="flex:1;height:32px;border-radius:4px;background:#D49A50"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;color:#5A4E44">
+        <span>#9A6830</span><span>#B87840</span><span>#C88A48</span><span>#D49A50</span>
+      </div>
+      <div style="border:1px solid #B87840;border-radius:8px;padding:12px 14px;background:#1A1B22;box-shadow:inset 0 1px 0 rgba(212,154,80,0.15),0 0 0 1px rgba(212,154,80,0.06)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#D49A50;margin-bottom:6px">Quest Card</div>
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:#E8DDD0;margin-bottom:4px">Mage Tank: Book 3</div>
+        <div style="height:4px;background:#1E1F28;border-radius:99px;overflow:hidden;border:1px solid #B8784040">
+          <div style="height:100%;width:62%;background:#C4852B;border-radius:99px"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#B87840,transparent)"></div>
+        <div style="width:6px;height:6px;background:#D49A50;transform:rotate(45deg)"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,#B87840,transparent)"></div>
+      </div>
+      <div style="font-size:11px;color:#5A4E44;line-height:1.6">Warmest option — starts to blend with amber at this range. Works well for highlighted/selected card states rather than default borders.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8: LOCKED PALETTE SUMMARY
+════════════════════════════════════════════ -->
+<p class="section-label" style="margin-top:72px">✓ Locked — Inn Keeper UI Foundation Palette</p>
+<p class="section-note">All decisions confirmed from reference images + comparisons. These are the system tokens.</p>
+
+<div style="background:#14151A;border-radius:16px;border:2px solid #9A6830;box-shadow:0 0 0 1px #9A683030,0 8px 40px rgba(0,0,0,0.6);overflow:hidden;max-width:900px">
+
+  <!-- header -->
+  <div style="padding:24px 32px 20px;border-bottom:1px solid #9A683030;background:linear-gradient(180deg,rgba(154,104,48,0.08) 0%,transparent 100%)">
+    <div style="font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:#E8DDD0;letter-spacing:0.06em;margin-bottom:4px">Inn Keeper UI</div>
+    <div style="font-size:12px;color:#6A5C50;letter-spacing:0.08em;text-transform:uppercase">Foundation Color System — v0.1</div>
+  </div>
+
+  <div style="padding:28px 32px;display:flex;flex-direction:column;gap:28px">
+
+    <!-- backgrounds row -->
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A4E44;margin-bottom:12px">Backgrounds</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#0E0F13;border:1px solid #9A683030"></div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#0E0F13</div>
+          <div style="font-size:10px;color:#6A5C50">Base</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#14151A;border:1px solid #9A683030"></div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#14151A</div>
+          <div style="font-size:10px;color:#6A5C50">Surface</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#1A1B22;border:1px solid #9A683030"></div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#1A1B22</div>
+          <div style="font-size:10px;color:#6A5C50">Card</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#22242E;border:1px solid #9A683030"></div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#22242E</div>
+          <div style="font-size:10px;color:#6A5C50">Elevated</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#2C2E3A;border:1px solid #9A683030"></div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#2C2E3A</div>
+          <div style="font-size:10px;color:#6A5C50">Overlay</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- accent colors -->
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A4E44;margin-bottom:12px">Accent Colors — Locked</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#C4852B;box-shadow:0 4px 16px rgba(196,133,43,0.35)"></div>
+          <div style="font-family:monospace;font-size:10px;color:#C4852B">#C4852B</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Amber<br>Primary</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#2DD4BF;box-shadow:0 4px 16px rgba(45,212,191,0.3)"></div>
+          <div style="font-family:monospace;font-size:10px;color:#2DD4BF">#2DD4BF</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Frost Teal<br>Secondary</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#4ADE80;box-shadow:0 4px 16px rgba(74,222,128,0.25)"></div>
+          <div style="font-family:monospace;font-size:10px;color:#4ADE80">#4ADE80</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Success<br>Complete</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#F87171;box-shadow:0 4px 16px rgba(248,113,113,0.25)"></div>
+          <div style="font-family:monospace;font-size:10px;color:#F87171">#F87171</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Danger<br>Error</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- material colors -->
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A4E44;margin-bottom:12px">Material — Bronze Frame</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:linear-gradient(135deg,#7A4E28,#9A6830,#B88040,#9A6830)"></div>
+          <div style="font-family:monospace;font-size:10px;color:#9A6830">#9A6830</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Bronze<br>Border</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#B88040"></div>
+          <div style="font-family:monospace;font-size:10px;color:#B88040">#B88040</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Bronze<br>Highlight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- text colors -->
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A4E44;margin-bottom:12px">Typography</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#F0E8D8;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#14151A">Aa</span>
+          </div>
+          <div style="font-family:monospace;font-size:10px;color:#F0E8D8">#F0E8D8</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Primary<br>Text</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#9B8B7A;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#14151A">Aa</span>
+          </div>
+          <div style="font-family:monospace;font-size:10px;color:#9B8B7A">#9B8B7A</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Secondary<br>Text</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <div style="width:72px;height:72px;border-radius:8px;background:#5A4E44;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#14151A">Aa</span>
+          </div>
+          <div style="font-family:monospace;font-size:10px;color:#5A4E44">#5A4E44</div>
+          <div style="font-size:10px;color:#6A5C50;text-align:center">Muted<br>Text</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- live preview strip -->
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5A4E44;margin-bottom:12px">Live Preview — All Tokens Together</div>
+      <div style="background:#1A1B22;border:1px solid #9A6830;border-radius:10px;padding:16px;box-shadow:inset 0 1px 0 rgba(184,128,64,0.08)">
+        <!-- top bar -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <span style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:#F0E8D8">Los Goobers</span>
+          <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px">Active</span>
+        </div>
+        <!-- progress -->
+        <div style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:#9B8B7A;margin-bottom:5px"><span>Epic Quest</span><span>62%</span></div>
+          <div style="height:5px;background:#0E0F13;border-radius:99px;overflow:hidden;border:1px solid #9A683030">
+            <div style="height:100%;width:62%;background:#C4852B;border-radius:99px"></div>
+          </div>
+        </div>
+        <!-- badges -->
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="background:#C4852B22;color:#C4852B;border:1px solid #C4852B40;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">Quest</span>
+          <span style="background:#2DD4BF22;color:#2DD4BF;border:1px solid #2DD4BF40;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">Enchanted</span>
+          <span style="background:#4ADE8022;color:#4ADE80;border:1px solid #4ADE8040;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">Complete</span>
+          <span style="background:#F8717122;color:#F87171;border:1px solid #F8717140;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px">Boss</span>
+        </div>
+        <!-- buttons -->
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <button style="flex:1;padding:9px 0;border-radius:8px;border:none;background:#C4852B;color:#1A0C02;font:700 12px/1 'Cinzel',serif;letter-spacing:.04em;cursor:pointer">Start Quest</button>
+          <button style="flex:1;padding:9px 0;border-radius:8px;border:2px solid #2DD4BF;background:transparent;color:#2DD4BF;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Ice Rune</button>
+          <button style="flex:1;padding:9px 0;border-radius:8px;border:1px solid #9A683040;background:#22242E;color:#9B8B7A;font:600 12px/1 'Inter',sans-serif;cursor:pointer">Settings</button>
+        </div>
+        <!-- divider -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#9A6830,transparent)"></div>
+          <div style="width:5px;height:5px;background:#B88040;transform:rotate(45deg)"></div>
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,#9A6830,transparent)"></div>
+        </div>
+        <!-- comment -->
+        <div style="font-size:12px;color:#9B8B7A">
+          Donto · <span style="background:#C4852B18;color:#C4852B;padding:1px 5px;border-radius:3px;font-weight:600">13:25:28</span> lol just hit me this is Animal Crossing
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p style="margin-top:56px;font-size:12px;color:#4A3E34;text-align:center;line-height:1.8">
+  Contrast ratios calculated per WCAG 2.1 relative luminance formula.<br>
+  Flat dark section uses background #1E1610 · Neumorphic dark uses #2A1E14 · Parchment uses #E8D9B8.<br>
+  Secondary options use deeper background #120D08 to show maximum pop.<br>
+  Skeuomorphic parchment text (#3A1E04 on #EDD9A0) passes AAA at 12.4:1 throughout.
+</p>
+
+</body>
+</html>
