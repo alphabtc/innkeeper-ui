@@ -515,6 +515,90 @@ body {
 
 
 /* ══════════════════════════════════════════════════════
+   DUNGEON KEEPER — cold stone, bioluminescent green, blood crimson
+   Completely different temperature: obsidian bg, cold pale text,
+   sickly green glows from floor-level torches, carved stone surfaces.
+   Same app structure, opposite soul.
+══════════════════════════════════════════════════════ */
+/* stone surface texture */
+.dk-card {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background:
+    repeating-linear-gradient(
+      168deg,
+      transparent, transparent 36px,
+      rgba(255,255,255,0.012) 36px, rgba(255,255,255,0.012) 37px
+    ),
+    linear-gradient(145deg, #161B20 0%, #101418 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.dk-card-inner { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+
+/* carved stone quest header — cold chisel look */
+.dk-quest-head {
+  background:
+    repeating-linear-gradient(
+      168deg,
+      transparent, transparent 18px,
+      rgba(0,0,0,0.08) 18px, rgba(0,0,0,0.08) 19px
+    ),
+    linear-gradient(180deg, #1E252C 0%, #161C22 100%);
+  padding: 11px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.dk-quest-title {
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
+  color: #D8E0E8; line-height: 1.35; flex: 1;
+}
+.dk-quest-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px; flex-shrink: 0;
+}
+.dk-quest-body {
+  padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px;
+  background: linear-gradient(145deg, #0E1318 0%, #0A0E12 100%);
+}
+
+/* bioluminescent green progress */
+.dk-prog-fill-green {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #158040, #22C860 60%, #1AA050);
+  box-shadow: 0 0 10px rgba(34,200,96,0.55), 0 0 4px rgba(34,200,96,0.3);
+}
+/* blood progress (for a "under siege" variant) */
+.dk-prog-fill-red {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #8B1515, #DC2626 60%, #AA1A1A);
+  box-shadow: 0 0 10px rgba(220,38,38,0.5);
+}
+
+/* green CTA button */
+.dk-btn-green {
+  width: 100%; padding: 14px 0;
+  border-radius: 14px; border: none; cursor: pointer;
+  font: 700 13px/1 'Inter', sans-serif; letter-spacing: .01em;
+  color: #040E08;
+  background: linear-gradient(180deg, #2EE870 0%, #18A848 30%, #128038 60%, #18A848 82%, #2EE870 100%);
+  box-shadow: 0 2px 0 #0A4820, 0 4px 14px rgba(0,0,0,0.6), inset 0 1px 0 rgba(120,255,160,0.4),
+    0 0 20px rgba(34,168,80,0.2);
+  text-shadow: 0 1px 0 rgba(80,255,120,0.3);
+  margin-bottom: 8px;
+}
+.dk-btn-ghost {
+  width: 100%; padding: 13px 0;
+  border-radius: 14px; cursor: pointer;
+  font: 600 12px/1 'Inter', sans-serif;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #5A6A78;
+}
+
+
+/* ══════════════════════════════════════════════════════
    COZY TAVERN V2 — dark wood bg + light text (high contrast)
    Key fix: text and bg are different tone families entirely.
    Bg: near-black espresso. Text: light cream/neutral.
@@ -2913,6 +2997,191 @@ body {
         <div class="tv2-tab"><div class="tv2-tab-pip"></div>Guild</div>
         <div class="tv2-tab"><div class="tv2-tab-pip"></div>Quests</div>
         <div class="tv2-tab"><div class="tv2-tab-pip"></div>Profile</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     DUNGEON KEEPER — app variation
+════════════════════════════════════════════ -->
+<p class="section-label">Dungeon Keeper — corrected from reference screenshot</p>
+<p class="section-note">
+  The real DK palette is <strong style="color:#EDE8E0">warm ochre stone</strong>, not cold blue — hewn sandstone blocks, torch fire orange, stacked red health / purple mana bars, parchment-gold text. Mission briefings delivered in a carved stone scroll panel.
+  Same app structure, completely different world.
+</p>
+
+<div class="phone-showcase">
+
+  <div class="phone-col">
+    <div class="phone-col-label" style="color:#7A5A20">Dungeon Keeper</div>
+    <div class="phone-frame" style="background:linear-gradient(160deg,#282420 0%,#181410 60%,#201C18 100%)">
+      <div class="phone-pill" style="background:#0C0A08"></div>
+      <div class="phone-screen" style="background:
+        radial-gradient(ellipse at 15% 55%, rgba(200,90,10,0.13) 0%, transparent 38%),
+        radial-gradient(ellipse at 85% 55%, rgba(200,90,10,0.10) 0%, transparent 34%),
+        radial-gradient(ellipse at 50% 100%, rgba(160,60,5,0.10) 0%, transparent 45%),
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0,0,0,0.14) 28px, rgba(0,0,0,0.14) 29px),
+        repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(0,0,0,0.06) 28px, rgba(0,0,0,0.06) 29px),
+        linear-gradient(180deg, #100C08 0%, #0C0906 100%)">
+
+        <!-- status bar — warm sandy -->
+        <div class="app-sb" style="color:#8A7848">
+          <span style="color:#D4C080;font-weight:700">9:41</span>
+          <div class="app-sb-right" style="color:#8A7848">▲▲▲ ◼ 🔋</div>
+        </div>
+
+        <div class="app-scroll">
+
+          <!-- hero -->
+          <div class="app-hero" style="margin-bottom:18px">
+            <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C88030;margin-bottom:4px">
+              🔥 The Keep Awakens
+            </div>
+            <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#D4C080;line-height:1.2;margin-bottom:8px">Dungeon Keeper</div>
+            <!-- torch-fire rule -->
+            <div style="width:32px;height:2px;background:linear-gradient(90deg,#C05010,#F08030);border-radius:1px;box-shadow:0 0 10px rgba(200,100,20,0.7)"></div>
+          </div>
+
+          <!-- active siege heading -->
+          <div class="app-section-head">
+            <div class="app-section-title" style="color:#D4C080">
+              <span style="color:#C82020;font-size:10px;margin-right:5px">◆</span>Active Siege
+            </div>
+            <div style="font-size:12px;font-weight:600;color:#C88030">See all</div>
+          </div>
+
+          <!-- siege card — hewn stone surface -->
+          <div style="border-radius:14px;overflow:hidden;margin-bottom:10px;
+            background:
+              repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0,0,0,0.16) 24px, rgba(0,0,0,0.16) 25px),
+              repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(0,0,0,0.07) 24px, rgba(0,0,0,0.07) 25px),
+              linear-gradient(145deg, #2E2418 0%, #221A10 100%);
+            border:1px solid rgba(160,120,40,0.25);
+            box-shadow:inset 0 1px 0 rgba(200,160,60,0.06)">
+
+            <!-- carved stone header band -->
+            <div style="padding:11px 14px;border-bottom:1px solid rgba(100,70,20,0.3);
+              background:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(0,0,0,0.2) 24px,rgba(0,0,0,0.2) 25px),
+              linear-gradient(180deg,#3A2E1C 0%,#2A2014 100%);
+              display:flex;align-items:center;justify-content:space-between">
+              <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#D4C080;line-height:1.35;flex:1">☠️ Raze the Wanderer's Library</div>
+              <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;flex-shrink:0;
+                background:rgba(200,32,32,.2);border:1px solid rgba(200,32,32,.4);color:#E05050">Siege</div>
+            </div>
+
+            <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;
+              background:linear-gradient(145deg,#1E1810 0%,#181208 100%)">
+              <div style="font-size:12px;color:#8A7848;line-height:1.6">Breach the outer walls before the scholars finish their research. No survivors.</div>
+
+              <!-- stacked HP + MP bars — the real DK style -->
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:9px;font-weight:700;color:#8A7848;width:18px;flex-shrink:0">HP</span>
+                  <div style="flex:1;height:6px;background:#0C0806;border-radius:2px;border:1px solid rgba(200,32,32,0.3);overflow:hidden">
+                    <div style="width:71%;height:100%;background:linear-gradient(90deg,#8B1515,#DC3535);box-shadow:0 0 8px rgba(220,53,53,0.55)"></div>
+                  </div>
+                  <span style="font-size:9px;font-weight:700;color:#C82020;width:24px;text-align:right">71%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:9px;font-weight:700;color:#8A7848;width:18px;flex-shrink:0">MP</span>
+                  <div style="flex:1;height:6px;background:#0C0806;border-radius:2px;border:1px solid rgba(112,64,184,0.3);overflow:hidden">
+                    <div style="width:45%;height:100%;background:linear-gradient(90deg,#4A1A90,#8040C0);box-shadow:0 0 8px rgba(128,64,192,0.55)"></div>
+                  </div>
+                  <span style="font-size:9px;font-weight:700;color:#8040C0;width:24px;text-align:right">45%</span>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <span style="font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;background:rgba(200,32,32,.16);border:1px solid rgba(200,32,32,.3);color:#E05050">Siege</span>
+                <span style="font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;background:rgba(200,100,10,.16);border:1px solid rgba(200,100,10,.3);color:#D4700A">Unstoppable</span>
+                <span style="font-size:10px;font-weight:600;padding:3px 9px;border-radius:99px;background:rgba(128,64,192,.14);border:1px solid rgba(128,64,192,.28);color:#9060D0">Cursed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- mission briefing scroll — the DK text panel -->
+          <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(140,100,30,0.35);margin-bottom:10px;
+            background:
+              repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(0,0,0,0.12) 24px,rgba(0,0,0,0.12) 25px),
+              linear-gradient(180deg,#261E0E 0%,#1C1608 100%)">
+            <div style="padding:4px 12px 3px;background:linear-gradient(90deg,#3A2A10,#2E2010,#3A2A10);
+              border-bottom:1px solid rgba(140,100,30,0.3);
+              font-family:'Cinzel',serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A6828">
+              Keeper's Orders
+            </div>
+            <div style="padding:10px 12px;display:flex;gap:8px;align-items:flex-start">
+              <span style="font-size:13px;flex-shrink:0;line-height:1.5;opacity:.8">👁</span>
+              <div style="font-family:'Cinzel',serif;font-size:11px;color:#D4C080;line-height:1.75;font-weight:400;letter-spacing:.01em">
+                A devious scholar has pilfered your grimoire. Deploy your Imps — retrieve it, and make an example of his foolishness.
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA — torch fire -->
+          <button style="width:100%;padding:14px 0;border-radius:14px;border:none;cursor:pointer;
+            font:700 13px/1 'Inter',sans-serif;letter-spacing:.01em;color:#F8E8C0;margin-bottom:8px;
+            background:linear-gradient(180deg,#E07030 0%,#A04010 30%,#7A2C08 58%,#A04010 80%,#E07030 100%);
+            box-shadow:0 2px 0 #4A1808,0 4px 14px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,180,80,0.3),0 0 20px rgba(200,80,10,0.18);
+            text-shadow:0 1px 0 rgba(255,160,60,0.4)">⛏️ Deploy Minions</button>
+          <button style="width:100%;padding:13px 0;border-radius:14px;cursor:pointer;
+            font:600 12px/1 'Inter',sans-serif;background:transparent;
+            border:1px solid rgba(140,100,30,0.35);color:#6A5830">Fortify Keep</button>
+
+        </div>
+
+        <!-- bottom tab bar — warm stone -->
+        <div class="app-tabbar" style="
+          background:
+            repeating-linear-gradient(90deg,transparent,transparent 28px,rgba(0,0,0,0.08) 28px,rgba(0,0,0,0.08) 29px),
+            linear-gradient(180deg,#160E08,#100A06);
+          border-color:rgba(120,80,20,0.25)">
+          <div class="app-tab on" style="color:#C88030"><div class="app-tab-icon">💀</div>Crypts</div>
+          <div class="app-tab" style="color:#4A3818"><div class="app-tab-icon">⛏️</div>Dig</div>
+          <div class="app-tab" style="color:#4A3818"><div class="app-tab-icon">👺</div>Horde</div>
+          <div class="app-tab" style="color:#4A3818"><div class="app-tab-icon">👁️</div>Scry</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-col-desc" style="color:#6A5830">
+      Warm ochre stone · torch fire orange · HP/MP bars · parchment-gold text.<br>
+      Mission briefing scroll. Same app DNA. Darker soul.
+    </div>
+  </div>
+
+  <!-- side-by-side token comparison -->
+  <div style="display:flex;flex-direction:column;justify-content:center;gap:28px;max-width:240px;padding:20px 0">
+    <div style="border-radius:12px;
+      background:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(0,0,0,0.12) 24px,rgba(0,0,0,0.12) 25px),
+      linear-gradient(145deg,#2A2018 0%,#1E1610 100%);
+      border:1px solid rgba(140,100,30,0.3);padding:16px">
+      <div style="font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C88030;margin-bottom:10px">Dungeon</div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Background</span><span style="font-family:monospace;color:#D4C080">#100C08</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Surface</span><span style="font-family:monospace;color:#D4C080">#2A2418</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Text</span><span style="font-family:monospace;color:#D4C080">#D4C080</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Torch</span><span style="font-family:monospace;color:#C88030">#C88030</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Health</span><span style="font-family:monospace;color:#C82020">#C82020</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Mana</span><span style="font-family:monospace;color:#8040C0">#8040C0</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Texture</span><span style="color:#D4C080">Hewn stone</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#6A5828">Glow</span><span style="color:#D4C080">Wall torches</span></div>
+      </div>
+    </div>
+
+    <div style="border-radius:12px;background:#1A1208;border:1px solid #3A2210;padding:16px">
+      <div style="font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#C4852B;margin-bottom:10px">Squabble Inn</div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Background</span><span style="font-family:monospace;color:#EDE8E0">#0D0702</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Surface</span><span style="font-family:monospace;color:#EDE8E0">#201608</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Text</span><span style="font-family:monospace;color:#EDE8E0">#EDE8E0</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Lantern</span><span style="font-family:monospace;color:#C4852B">#C4852B</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Magic</span><span style="font-family:monospace;color:#2DD4BF">#2DD4BF</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Growth</span><span style="font-family:monospace;color:#4ADE80">#4ADE80</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Texture</span><span style="color:#EDE8E0">Warm wood</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#5A4030">Glow</span><span style="color:#EDE8E0">Wall lanterns</span></div>
       </div>
     </div>
   </div>
