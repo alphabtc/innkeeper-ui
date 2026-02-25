@@ -383,6 +383,172 @@ body {
 
 
 /* ══════════════════════════════════════════════════════
+   COZY TAVERN V2 — dark wood bg + light text (high contrast)
+   Key fix: text and bg are different tone families entirely.
+   Bg: near-black espresso. Text: light cream/neutral.
+   Warmth comes from lantern GLOW SPOTS, not text color.
+   Contrast checked: primary 14:1 AAA · secondary 6:1 AA
+══════════════════════════════════════════════════════ */
+.tv2-card {
+  width: 288px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  /* near-black espresso base — like shadowed dark oak */
+  background:
+    radial-gradient(circle at 8%  10%, rgba(255,130,20,0.11) 0%, transparent 32%),
+    radial-gradient(circle at 92% 10%, rgba(255,130,20,0.09) 0%, transparent 28%),
+    radial-gradient(ellipse at 50% 0%, rgba(180,100,10,0.07) 0%, transparent 55%),
+    linear-gradient(180deg, #130A04 0%, #0D0702 100%);
+  border: 1px solid #3E2410;
+  box-shadow:
+    0 0 0 1px #1E0E06,
+    0 8px 48px rgba(0,0,0,0.9),
+    0 0 40px rgba(180,100,10,0.06);
+}
+/* lantern sconce icons — purely decorative top corners */
+.tv2-sconce-left, .tv2-sconce-right {
+  position: absolute;
+  top: 12px;
+  width: 8px; height: 20px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #9A6820, #5A3A10);
+  box-shadow: 0 0 12px rgba(255,140,30,0.5);
+}
+.tv2-sconce-left  { left: 14px; }
+.tv2-sconce-right { right: 14px; }
+.tv2-sconce-left::after, .tv2-sconce-right::after {
+  content: '';
+  position: absolute;
+  top: -5px; left: 50%; transform: translateX(-50%);
+  width: 6px; height: 9px;
+  border-radius: 50% 50% 30% 30%;
+  background: radial-gradient(ellipse at 50% 80%, #FF9020, #FFD060 40%, rgba(255,200,60,0.4) 80%, transparent 100%);
+  box-shadow: 0 0 8px rgba(255,160,30,0.7), 0 0 20px rgba(255,120,10,0.3);
+}
+
+.tv2-header {
+  padding: 22px 18px 16px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid #2E1A0A;
+  position: relative;
+}
+.tv2-avatar {
+  width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+  background: radial-gradient(circle at 35% 35%, #D4A820, #8A6010 60%, #4A2808 100%);
+  border: 2px solid #7A5010;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 16px rgba(200,152,30,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: #1A0A02;
+}
+/* PRIMARY TEXT: #EDE8E0 on #130A04 = ~14:1 AAA */
+.tv2-guild { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700; color: #EDE8E0; }
+/* SECONDARY TEXT: #BFB09A on #130A04 = ~6:1 AA */
+.tv2-sub { font-size: 11px; color: #BFB09A; margin-top: 3px; }
+.tv2-badge-amber {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 99px; flex-shrink: 0;
+  background: rgba(196,133,43,0.18); border: 1px solid rgba(196,133,43,0.35); color: #E0A040;
+  display: flex; align-items: center; gap: 4px;
+}
+.tv2-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 6px rgba(74,222,128,0.7); }
+
+.tv2-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* Quest block — dark panel with parchment header strip */
+.tv2-quest {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #3A2210;
+  box-shadow: inset 0 1px 0 rgba(255,180,40,0.04);
+}
+.tv2-quest-head {
+  /* parchment strip for the quest title — light bg, dark text */
+  background: linear-gradient(180deg, #DDD0A0 0%, #C8BC8A 100%);
+  padding: 9px 13px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tv2-quest-title {
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
+  /* dark ink on parchment = AAA */
+  color: #2A1408; letter-spacing: 0.03em;
+}
+.tv2-quest-rank {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px;
+  background: rgba(180,100,10,0.2); border: 1px solid rgba(180,100,10,0.4); color: #7A4A10;
+}
+.tv2-quest-body {
+  background: linear-gradient(145deg, #1A1008 0%, #130C05 100%);
+  padding: 12px 13px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+/* desc text: #BFB09A on #130C05 = ~6:1 AA */
+.tv2-quest-desc { font-size: 11px; color: #BFB09A; line-height: 1.65; }
+.tv2-prog-wrap { display: flex; flex-direction: column; gap: 5px; }
+.tv2-prog-head { display: flex; justify-content: space-between; }
+/* label: #A09080 on #130C05 = ~4.5:1 AA */
+.tv2-prog-label { font-size: 10px; font-weight: 600; color: #A09080; }
+.tv2-prog-pct { font-size: 10px; font-weight: 700; color: #C4852B; }
+.tv2-prog-track {
+  height: 7px; background: #080502; border-radius: 99px;
+  border: 1px solid #3A2210;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.85);
+  overflow: hidden;
+}
+.tv2-prog-fill {
+  height: 100%; border-radius: 99px; width: 62%;
+  background: linear-gradient(90deg, #9A6820, #ECC040 60%, #C89820);
+  box-shadow: 0 0 10px rgba(220,190,40,0.5), 0 0 4px rgba(255,200,40,0.3);
+}
+
+/* tags */
+.tv2-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tv2-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; }
+
+/* ornamental divider */
+.tv2-divider { display: flex; align-items: center; gap: 8px; }
+.tv2-div-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #3A2210, transparent); }
+.tv2-div-gem { width: 5px; height: 5px; background: #C4852B; transform: rotate(45deg); box-shadow: 0 0 6px rgba(196,133,43,0.5); }
+
+/* buttons */
+.tv2-btn-primary {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 700 11px/1 'Cinzel', serif; letter-spacing: 0.06em; color: #1A0804;
+  background: linear-gradient(180deg, #F2D060 0%, #C89820 28%, #9A7020 55%, #C89820 80%, #ECC040 100%);
+  box-shadow: 0 2px 0 #5A3A08, 0 3px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,240,120,0.5);
+  text-shadow: 0 1px 0 rgba(255,220,80,0.5);
+}
+.tv2-btn-ghost {
+  flex: 1; padding: 10px 0; border-radius: 6px; cursor: pointer;
+  font: 600 11px/1 'Inter', sans-serif; background: transparent;
+  border: 1px solid #3A2210;
+  /* ghost label: #A09080 = ~4.5:1 AA */
+  color: #A09080;
+}
+.tv2-btn-teal {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 600 11px/1 'Inter', sans-serif; color: #041E1C;
+  background: linear-gradient(180deg, #38E8D8 0%, #20B8A8 40%, #189890 100%);
+  box-shadow: 0 2px 0 #0C6056, 0 3px 10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(120,255,240,0.4);
+  font-weight: 600;
+}
+
+/* comment */
+.tv2-comment { font-size: 11px; color: #8A7A6A; line-height: 1.6; }
+.tv2-ts { background: rgba(196,133,43,0.18); color: #C4852B; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+
+/* tab bar */
+.tv2-tabs { display: flex; border-top: 1px solid #2A1A08; margin: 4px -18px -18px; padding: 10px 18px 8px; }
+.tv2-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; }
+/* inactive tab: #8A7A6A = ~3.5:1 — acceptable for tab UI at this size */
+.tv2-tab { color: #6A5A4A; }
+.tv2-tab.on { color: #C4852B; font-weight: 600; }
+.tv2-tab-pip { width: 18px; height: 3px; border-radius: 99px; background: transparent; }
+.tv2-tab.on .tv2-tab-pip { background: linear-gradient(90deg, #C89820, #F0C840); box-shadow: 0 0 6px rgba(200,152,32,0.5); }
+
+
+/* ══════════════════════════════════════════════════════
    ORNATE CARD FRAME — Hearthstone-style fantasy card
 ══════════════════════════════════════════════════════ */
 .card-showcase {
@@ -2233,6 +2399,157 @@ body {
           <div class="tc-tab-pip"></div>
           Profile
         </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     COZY TAVERN CARD V2 — high contrast
+════════════════════════════════════════════ -->
+<p class="section-label">Cozy Tavern Card v2 — fixed contrast</p>
+<p class="section-note">
+  <strong style="color:#EDE8E0">What changed:</strong> text and background are now different tone families.
+  Dark espresso wood bg (<span style="font-family:monospace;color:#C4852B">#0D0702</span>) + near-white cream text (<span style="font-family:monospace;color:#C4852B">#EDE8E0</span>) = 14:1 AAA.
+  Warmth comes from lantern glow spots at top corners, not from muting the text.
+  Quest title uses a parchment insert — dark ink on light bg, like a real posted notice.
+</p>
+
+<div class="tavern-showcase">
+
+  <!-- V2 — Amber primary -->
+  <div class="tv2-card">
+    <div class="tv2-sconce-left"></div>
+    <div class="tv2-sconce-right"></div>
+    <div class="tv2-header">
+      <div class="tv2-avatar">W</div>
+      <div style="flex:1;min-width:0">
+        <div class="tv2-guild">Los Goobers</div>
+        <div class="tv2-sub">Fantasy Lit-RPG · 8 members</div>
+      </div>
+      <div class="tv2-badge-amber">
+        <span class="tv2-online-dot"></span>Active
+      </div>
+    </div>
+    <div class="tv2-body">
+
+      <div class="tv2-quest">
+        <div class="tv2-quest-head">
+          <div class="tv2-quest-title">⚔ The Iron Throne of Pages</div>
+          <div class="tv2-quest-rank">Epic</div>
+        </div>
+        <div class="tv2-quest-body">
+          <div class="tv2-quest-desc">Complete 3 chapters before the next guild meet. Discussion unlocks at 80% completion.</div>
+          <div class="tv2-prog-wrap">
+            <div class="tv2-prog-head">
+              <span class="tv2-prog-label">Guild Progress</span>
+              <span class="tv2-prog-pct">62%</span>
+            </div>
+            <div class="tv2-prog-track"><div class="tv2-prog-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tv2-tags">
+        <span class="tv2-tag" style="background:rgba(196,133,43,.18);border:1px solid rgba(196,133,43,.35);color:#E0A040">Quest</span>
+        <span class="tv2-tag" style="background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);color:#2DD4BF">Enchanted</span>
+        <span class="tv2-tag" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:#4ADE80">On Track</span>
+      </div>
+
+      <div class="tv2-divider">
+        <div class="tv2-div-line"></div><div class="tv2-div-gem"></div><div class="tv2-div-line"></div>
+      </div>
+
+      <div style="display:flex;gap:8px">
+        <button class="tv2-btn-primary">Start Reading</button>
+        <button class="tv2-btn-ghost">View Guild</button>
+      </div>
+
+      <div class="tv2-comment">
+        Donto · <span class="tv2-ts">13:25</span> lol just hit me this is Animal Crossing
+      </div>
+
+      <div class="tv2-tabs">
+        <div class="tv2-tab on"><div class="tv2-tab-pip"></div>Library</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Guild</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Quests</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Profile</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 — Teal secondary (Mage Tower) -->
+  <div class="tv2-card" style="background:
+    radial-gradient(circle at 8% 10%, rgba(45,212,191,0.08) 0%, transparent 32%),
+    radial-gradient(circle at 92% 10%, rgba(45,212,191,0.06) 0%, transparent 28%),
+    radial-gradient(ellipse at 50% 0%, rgba(20,140,120,0.06) 0%, transparent 55%),
+    linear-gradient(180deg, #08100E 0%, #050C0A 100%);
+    border-color:#1E3830">
+    <!-- teal sconces -->
+    <div class="tv2-sconce-left" style="box-shadow:0 0 12px rgba(45,212,191,0.4);background:linear-gradient(180deg,#189880,#0A4838)"></div>
+    <div class="tv2-sconce-right" style="box-shadow:0 0 12px rgba(45,212,191,0.4);background:linear-gradient(180deg,#189880,#0A4838)"></div>
+    <div style="position:absolute;top:7px;left:14px;width:6px;height:9px;border-radius:50% 50% 30% 30%;background:radial-gradient(ellipse at 50% 80%,#40E8D8,#A0FFF0 40%,rgba(45,212,191,0.3) 80%,transparent 100%);box-shadow:0 0 8px rgba(45,212,191,0.8)"></div>
+    <div style="position:absolute;top:7px;right:14px;width:6px;height:9px;border-radius:50% 50% 30% 30%;background:radial-gradient(ellipse at 50% 80%,#40E8D8,#A0FFF0 40%,rgba(45,212,191,0.3) 80%,transparent 100%);box-shadow:0 0 8px rgba(45,212,191,0.8)"></div>
+
+    <div class="tv2-header" style="border-color:#1E3830">
+      <div class="tv2-avatar" style="background:radial-gradient(circle at 35% 35%,#40D8C8,#108870 60%,#062E28 100%);border-color:#1A8878">M</div>
+      <div style="flex:1;min-width:0">
+        <div class="tv2-guild">The Mage Tower</div>
+        <div class="tv2-sub">Arcane Lit · 12 members</div>
+      </div>
+      <div class="tv2-badge-amber" style="background:rgba(45,212,191,.14);border-color:rgba(45,212,191,.3);color:#2DD4BF">
+        <span class="tv2-online-dot"></span>Casting
+      </div>
+    </div>
+    <div class="tv2-body">
+
+      <div class="tv2-quest" style="border-color:#1E3830">
+        <div class="tv2-quest-head" style="background:linear-gradient(180deg,#C8E8E0 0%,#AECFC8 100%)">
+          <div class="tv2-quest-title" style="color:#082820">✦ The Arcane Chronicle Vol. 3</div>
+          <div class="tv2-quest-rank" style="background:rgba(10,120,100,.2);border-color:rgba(10,120,100,.4);color:#0A6850">Legendary</div>
+        </div>
+        <div class="tv2-quest-body" style="background:linear-gradient(145deg,#0C1A16 0%,#081210 100%)">
+          <div class="tv2-quest-desc">Decode the runes across chapters 7–11. First to complete earns the Archmage badge this season.</div>
+          <div class="tv2-prog-wrap">
+            <div class="tv2-prog-head">
+              <span class="tv2-prog-label">Guild Progress</span>
+              <span class="tv2-prog-pct" style="color:#2DD4BF">78%</span>
+            </div>
+            <div class="tv2-prog-track" style="background:#040A08;border-color:#1E3830">
+              <div class="tv2-prog-fill" style="width:78%;background:linear-gradient(90deg,#109880,#40E8D8 60%,#20B8A8);box-shadow:0 0 10px rgba(45,212,191,0.55)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tv2-tags">
+        <span class="tv2-tag" style="background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.3);color:#2DD4BF">Arcane Quest</span>
+        <span class="tv2-tag" style="background:rgba(196,133,43,.14);border:1px solid rgba(196,133,43,.3);color:#E0A040">Legendary</span>
+        <span class="tv2-tag" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:#4ADE80">Almost Done</span>
+      </div>
+
+      <div class="tv2-divider">
+        <div class="tv2-div-line" style="background:linear-gradient(90deg,transparent,#1E3830,transparent)"></div>
+        <div class="tv2-div-gem" style="background:#2DD4BF;box-shadow:0 0 6px rgba(45,212,191,0.6)"></div>
+        <div class="tv2-div-line" style="background:linear-gradient(90deg,transparent,#1E3830,transparent)"></div>
+      </div>
+
+      <div style="display:flex;gap:8px">
+        <button class="tv2-btn-teal">Cast Spell</button>
+        <button class="tv2-btn-ghost" style="border-color:#1E3830">Spellbook</button>
+      </div>
+
+      <div class="tv2-comment">
+        Merlin · <span style="background:rgba(45,212,191,.16);color:#2DD4BF;padding:1px 5px;border-radius:3px;font-weight:600">09:44</span> the runes in ch.9 are fire
+      </div>
+
+      <div class="tv2-tabs" style="border-color:#1E3830">
+        <div class="tv2-tab on" style="color:#2DD4BF"><div class="tv2-tab-pip" style="background:linear-gradient(90deg,#20B8A8,#40E8D8);box-shadow:0 0 6px rgba(45,212,191,.5)"></div>Library</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Guild</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Quests</div>
+        <div class="tv2-tab"><div class="tv2-tab-pip"></div>Profile</div>
       </div>
     </div>
   </div>
