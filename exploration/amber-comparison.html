@@ -383,6 +383,138 @@ body {
 
 
 /* ══════════════════════════════════════════════════════
+   MODERN APP — phone frame + app UI (Apple/Android vibes)
+   Same palette, stripped decoration, proper mobile patterns.
+   Left: Clean Dark (minimal). Right: Atmospheric (middle ground).
+══════════════════════════════════════════════════════ */
+.phone-showcase {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding: 32px 0 48px;
+  align-items: flex-start;
+}
+.phone-col { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.phone-col-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: #5A4830;
+}
+.phone-col-desc { font-size: 11px; color: #5A4830; text-align: center; max-width: 240px; line-height: 1.6; }
+
+/* phone bezel */
+.phone-frame {
+  width: 270px;
+  position: relative;
+  background: linear-gradient(160deg, #2E2E2E 0%, #1A1A1A 60%, #222 100%);
+  border-radius: 48px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 1px #3A3A3A,
+    0 0 0 3px #0A0A0A,
+    0 24px 64px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+.phone-screen {
+  border-radius: 38px;
+  overflow: hidden;
+  height: 556px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+/* dynamic island pill */
+.phone-pill {
+  position: absolute;
+  top: 10px; left: 50%; transform: translateX(-50%);
+  width: 88px; height: 30px;
+  background: #000;
+  border-radius: 15px;
+  z-index: 20;
+}
+
+/* ── status bar ── */
+.app-sb {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px 0;
+  font-size: 11px; font-weight: 600; letter-spacing: .01em;
+  color: #EDE8E0;
+  position: relative; z-index: 5; flex-shrink: 0;
+}
+.app-sb-right { display: flex; gap: 5px; align-items: center; font-size: 12px; }
+
+/* ── scrollable content area ── */
+.app-scroll { flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 10px 18px 0; }
+
+/* ── app header ── */
+.app-hero { margin-bottom: 16px; }
+.app-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+.app-hero-title { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: #EDE8E0; line-height: 1.2; }
+
+/* ── section heading ── */
+.app-section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.app-section-title { font-size: 13px; font-weight: 700; color: #EDE8E0; letter-spacing: -.01em; }
+.app-section-link { font-size: 12px; font-weight: 600; color: #C4852B; }
+
+/* ── quest card ── */
+.app-card { border-radius: 16px; overflow: hidden; margin-bottom: 10px; }
+.app-card-inner { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.app-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.app-card-title { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; color: #EDE8E0; line-height: 1.35; flex: 1; }
+.app-card-badge { font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; flex-shrink: 0; }
+.app-card-desc { font-size: 12px; color: #A09080; line-height: 1.6; }
+.app-prog-track { height: 4px; border-radius: 99px; overflow: hidden; }
+.app-prog-fill { height: 100%; border-radius: 99px; }
+.app-prog-meta { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 5px; }
+.app-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.app-tag { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 99px; }
+
+/* ── second smaller card — activity feed ── */
+.app-activity { border-radius: 16px; overflow: hidden; }
+.app-activity-row {
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.app-activity-row:last-child { border-bottom: none; }
+.app-activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.app-activity-name { font-size: 12px; font-weight: 600; color: #EDE8E0; flex: 1; }
+.app-activity-msg { font-size: 11px; color: #7A6A5A; }
+.app-activity-time { font-size: 10px; color: #5A4A3A; flex-shrink: 0; }
+
+/* ── primary button ── */
+.app-btn-primary {
+  width: 100%; padding: 14px 0;
+  border-radius: 14px; border: none; cursor: pointer;
+  font: 700 13px/1 'Inter', sans-serif; letter-spacing: .01em;
+  margin-bottom: 8px;
+}
+.app-btn-ghost-app {
+  width: 100%; padding: 13px 0;
+  border-radius: 14px; cursor: pointer;
+  font: 600 12px/1 'Inter', sans-serif;
+  background: transparent;
+}
+
+/* ── bottom tab bar ── */
+.app-tabbar {
+  flex-shrink: 0;
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 8px 4px 22px;
+}
+.app-tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-size: 9px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase;
+  color: #4A3A2A;
+}
+.app-tab.on { color: #C4852B; }
+.app-tab-icon { font-size: 19px; line-height: 1.2; }
+
+
+/* ══════════════════════════════════════════════════════
    COZY TAVERN V2 — dark wood bg + light text (high contrast)
    Key fix: text and bg are different tone families entirely.
    Bg: near-black espresso. Text: light cream/neutral.
@@ -2401,6 +2533,237 @@ body {
         </div>
       </div>
     </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION: MODERN APP — phone mockups
+════════════════════════════════════════════ -->
+<p class="section-label">Modern App — Apple/Android vibes, tavern soul</p>
+<p class="section-note">
+  Same palette. No ornate borders. Proper mobile patterns: dynamic island, status bar, bottom nav, card elevation.
+  Cinzel only for the app name and quest titles. Inter everywhere else.
+  <strong style="color:#EDE8E0">Left:</strong> Clean Dark — stripped to essentials, Apple-minimal.
+  <strong style="color:#EDE8E0">Right:</strong> Atmospheric Dark — subtle ambient warmth preserved. This is the middle ground.
+</p>
+
+<div class="phone-showcase">
+
+  <!-- ── PHONE 1: Clean Dark ── -->
+  <div class="phone-col">
+    <div class="phone-col-label">Clean Dark</div>
+    <div class="phone-frame">
+      <div class="phone-pill"></div>
+      <div class="phone-screen" style="background:#0D0A07">
+
+        <div class="app-sb">
+          <span>9:41</span>
+          <div class="app-sb-right">▲▲▲ ◼ 🔋</div>
+        </div>
+
+        <div class="app-scroll">
+          <!-- hero -->
+          <div class="app-hero">
+            <div class="app-hero-eyebrow" style="color:#C4852B">🏮 Good evening, Westley</div>
+            <div class="app-hero-title">Squabble Inn</div>
+          </div>
+
+          <!-- section heading -->
+          <div class="app-section-head">
+            <div class="app-section-title"><span style="color:#C4852B;font-size:10px;margin-right:5px">◆</span>Active Quest</div>
+            <div class="app-section-link">See all</div>
+          </div>
+
+          <!-- quest card — flat dark surface -->
+          <div class="app-card" style="background:#1C1812">
+            <div class="app-card-inner">
+              <div class="app-card-top">
+                <div class="app-card-title">⚔️ The Iron Throne of Pages</div>
+                <div class="app-card-badge" style="background:rgba(196,133,43,.18);border:1px solid rgba(196,133,43,.3);color:#C4852B">Epic</div>
+              </div>
+              <div class="app-card-desc">Complete 3 chapters before the next guild meet.</div>
+              <div>
+                <div class="app-prog-meta">
+                  <span style="color:#8A7A6A;font-weight:600">Los Goobers</span>
+                  <span style="color:#C4852B;font-weight:700">62%</span>
+                </div>
+                <div class="app-prog-track" style="background:#0D0A07">
+                  <div class="app-prog-fill" style="width:62%;background:#C4852B"></div>
+                </div>
+              </div>
+              <div class="app-tags">
+                <span class="app-tag" style="background:rgba(196,133,43,.14);color:#C4852B">Quest</span>
+                <span class="app-tag" style="background:rgba(45,212,191,.12);color:#2DD4BF">Enchanted</span>
+                <span class="app-tag" style="background:rgba(74,222,128,.1);color:#4ADE80">On Track</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- activity feed -->
+          <div class="app-section-head">
+            <div class="app-section-title"><span style="color:#C4852B;font-size:10px;margin-right:5px">◆</span>Guild Activity</div>
+            <div class="app-section-link">See all</div>
+          </div>
+          <div class="app-activity" style="background:#1C1812">
+            <div class="app-activity-row">
+              <div class="app-activity-dot" style="background:#C4852B"></div>
+              <div>
+                <div class="app-activity-name">Donto</div>
+                <div class="app-activity-msg">lol just hit me this is Animal Crossing</div>
+              </div>
+              <div class="app-activity-time">13:25</div>
+            </div>
+            <div class="app-activity-row">
+              <div class="app-activity-dot" style="background:#2DD4BF"></div>
+              <div>
+                <div class="app-activity-name">Merlin</div>
+                <div class="app-activity-msg">chapter 9 runes are 🔥</div>
+              </div>
+              <div class="app-activity-time">09:44</div>
+            </div>
+            <div class="app-activity-row" style="border-bottom:none">
+              <div class="app-activity-dot" style="background:#4ADE80"></div>
+              <div>
+                <div class="app-activity-name">Rhea</div>
+                <div class="app-activity-msg">finished the quest ✓</div>
+              </div>
+              <div class="app-activity-time">08:12</div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div style="margin-top:12px">
+            <button class="app-btn-primary" style="background:#C4852B;color:#1A0804">Continue Reading</button>
+            <button class="app-btn-ghost-app" style="border:1px solid #2E2010;color:#8A7A6A">View Guild</button>
+          </div>
+        </div>
+
+        <!-- bottom tab bar -->
+        <div class="app-tabbar" style="background:#0D0A07">
+          <div class="app-tab on"><div class="app-tab-icon">📜</div>Tomes</div>
+          <div class="app-tab"><div class="app-tab-icon">🗺️</div>Quests</div>
+          <div class="app-tab"><div class="app-tab-icon">🍺</div>Tavern</div>
+          <div class="app-tab"><div class="app-tab-icon">🎭</div>Alias</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-col-desc">Flat surfaces. No texture. Amber only as action color. Feels like a native dark mode app.</div>
+  </div>
+
+
+  <!-- ── PHONE 2: Atmospheric Dark (middle ground) ── -->
+  <div class="phone-col">
+    <div class="phone-col-label">Atmospheric Dark</div>
+    <div class="phone-frame">
+      <div class="phone-pill"></div>
+      <div class="phone-screen" style="background:
+        radial-gradient(ellipse at 50% 0%, rgba(196,133,43,0.10) 0%, transparent 50%),
+        radial-gradient(circle at 5% 18%, rgba(255,130,20,0.07) 0%, transparent 28%),
+        radial-gradient(circle at 95% 18%, rgba(255,130,20,0.06) 0%, transparent 26%),
+        linear-gradient(180deg, #130A04 0%, #0D0702 100%)">
+
+        <div class="app-sb">
+          <span>9:41</span>
+          <div class="app-sb-right">▲▲▲ ◼ 🔋</div>
+        </div>
+
+        <div class="app-scroll">
+          <!-- hero with amber underline rule -->
+          <div class="app-hero">
+            <div class="app-hero-eyebrow" style="color:#C4852B">🏮 Good evening, Westley</div>
+            <div class="app-hero-title" style="margin-bottom:8px">Squabble Inn</div>
+            <!-- the visual signature: thin amber rule -->
+            <div style="width:32px;height:2px;background:linear-gradient(90deg,#C4852B,#E8C040);border-radius:1px;box-shadow:0 0 8px rgba(196,133,43,0.5)"></div>
+          </div>
+
+          <!-- section heading -->
+          <div class="app-section-head">
+            <div class="app-section-title"><span style="color:#C4852B;font-size:10px;margin-right:5px">◆</span>Active Quest</div>
+            <div class="app-section-link">See all</div>
+          </div>
+
+          <!-- quest card — warm surface with subtle texture -->
+          <div class="app-card" style="background:
+            radial-gradient(ellipse at 100% 0%, rgba(196,133,43,0.06) 0%, transparent 50%),
+            linear-gradient(145deg, #201608 0%, #180E04 100%);
+            border:1px solid #3A2210">
+            <div class="app-card-inner">
+              <div class="app-card-top">
+                <div class="app-card-title">⚔️ The Iron Throne of Pages</div>
+                <div class="app-card-badge" style="background:rgba(196,133,43,.2);border:1px solid rgba(196,133,43,.35);color:#E0A040">Epic</div>
+              </div>
+              <div class="app-card-desc">Complete 3 chapters before the next guild meet.</div>
+              <div>
+                <div class="app-prog-meta">
+                  <span style="color:#8A7A6A;font-weight:600">Los Goobers</span>
+                  <span style="color:#C4852B;font-weight:700">62%</span>
+                </div>
+                <!-- slightly thicker bar, amber glow -->
+                <div class="app-prog-track" style="background:#0A0704;height:5px;border-radius:99px">
+                  <div class="app-prog-fill" style="width:62%;background:linear-gradient(90deg,#9A6820,#ECC040 70%,#C89820);box-shadow:0 0 8px rgba(220,180,40,0.45)"></div>
+                </div>
+              </div>
+              <div class="app-tags">
+                <span class="app-tag" style="background:rgba(196,133,43,.16);color:#D49030;border:1px solid rgba(196,133,43,.25)">Quest</span>
+                <span class="app-tag" style="background:rgba(45,212,191,.12);color:#2DD4BF;border:1px solid rgba(45,212,191,.2)">Enchanted</span>
+                <span class="app-tag" style="background:rgba(74,222,128,.1);color:#4ADE80;border:1px solid rgba(74,222,128,.2)">On Track</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- activity feed — warm surface -->
+          <div class="app-section-head">
+            <div class="app-section-title"><span style="color:#C4852B;font-size:10px;margin-right:5px">◆</span>Guild Activity</div>
+            <div class="app-section-link">See all</div>
+          </div>
+          <div class="app-activity" style="background:linear-gradient(145deg,#1C1208 0%,#160E06 100%);border:1px solid #2E1A0A;border-radius:16px">
+            <div class="app-activity-row">
+              <div class="app-activity-dot" style="background:#C4852B;box-shadow:0 0 6px rgba(196,133,43,0.5)"></div>
+              <div>
+                <div class="app-activity-name">Donto</div>
+                <div class="app-activity-msg">lol just hit me this is Animal Crossing</div>
+              </div>
+              <div class="app-activity-time">13:25</div>
+            </div>
+            <div class="app-activity-row">
+              <div class="app-activity-dot" style="background:#2DD4BF;box-shadow:0 0 6px rgba(45,212,191,0.5)"></div>
+              <div>
+                <div class="app-activity-name">Merlin</div>
+                <div class="app-activity-msg">chapter 9 runes are 🔥</div>
+              </div>
+              <div class="app-activity-time">09:44</div>
+            </div>
+            <div class="app-activity-row" style="border-bottom:none">
+              <div class="app-activity-dot" style="background:#4ADE80;box-shadow:0 0 6px rgba(74,222,128,0.5)"></div>
+              <div>
+                <div class="app-activity-name">Rhea</div>
+                <div class="app-activity-msg">finished the quest ✓</div>
+              </div>
+              <div class="app-activity-time">08:12</div>
+            </div>
+          </div>
+
+          <!-- CTA — gold metallic button kept from tavern -->
+          <div style="margin-top:12px">
+            <button class="app-btn-primary" style="background:linear-gradient(180deg,#F2D060 0%,#C89820 28%,#9A7020 55%,#C89820 80%,#ECC040 100%);color:#1A0804;box-shadow:0 2px 0 #5A3A08,0 4px 14px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,240,120,0.5);text-shadow:0 1px 0 rgba(255,220,80,0.4)">Continue Reading</button>
+            <button class="app-btn-ghost-app" style="border:1px solid #3A2210;color:#8A7A6A">View Guild</button>
+          </div>
+        </div>
+
+        <!-- bottom tab bar — warm tinted -->
+        <div class="app-tabbar" style="background:linear-gradient(180deg,#130A04,#0D0702);border-color:#2E1A0A">
+          <div class="app-tab on"><div class="app-tab-icon">📜</div>Tomes</div>
+          <div class="app-tab"><div class="app-tab-icon">🗺️</div>Quests</div>
+          <div class="app-tab"><div class="app-tab-icon">🍺</div>Tavern</div>
+          <div class="app-tab"><div class="app-tab-icon">🎭</div>Alias</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-col-desc">Ambient header glow. Warm card surfaces. Gold metallic CTA. Feels like an app that lives in a tavern.</div>
   </div>
 
 </div>
