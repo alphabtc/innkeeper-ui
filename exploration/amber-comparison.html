@@ -381,6 +381,480 @@ body {
 .c4 { --c: #D4AF37; --ct: #1A0C02; }
 .c5 { --c: #A8721E; --ct: #F0E8D8; }
 
+
+/* ══════════════════════════════════════════════════════
+   ORNATE CARD FRAME — Hearthstone-style fantasy card
+══════════════════════════════════════════════════════ */
+.card-showcase {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding: 32px 0 48px;
+}
+/* outer gold frame — built from layered backgrounds + box-shadow */
+.fantasy-card-frame {
+  width: 200px;
+  border-radius: 18px;
+  padding: 9px;
+  background: linear-gradient(180deg,
+    #F8E070 0%, #D4A820 12%, #8A6010 25%,
+    #B89030 38%, #7A5010 50%,
+    #C4952A 62%, #F0C840 75%,
+    #9A6820 88%, #F4D060 100%);
+  box-shadow:
+    0 0 0 2px #2E1A06,
+    0 0 0 4px #8A5C18,
+    0 10px 48px rgba(0,0,0,0.95),
+    0 0 32px rgba(194,149,42,0.12),
+    inset 0 1px 0 rgba(255,240,120,0.5),
+    inset 0 -2px 0 rgba(0,0,0,0.6);
+  flex-shrink: 0;
+  position: relative;
+}
+/* corner ornament diamonds */
+.fantasy-card-frame::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 15px;
+  background: transparent;
+  border: 1px solid rgba(255,220,80,0.15);
+  pointer-events: none;
+}
+/* inner dark navy panel */
+.fc-navy {
+  border-radius: 11px;
+  background: linear-gradient(160deg, #1C1E34 0%, #0E1020 55%, #181A2E 100%);
+  padding: 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(10,8,20,0.8);
+}
+/* ambient glow inside card */
+.fc-navy::before {
+  content: '';
+  position: absolute;
+  top: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 80px;
+  background: radial-gradient(ellipse, rgba(194,149,42,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* top gold accent bar */
+.fc-top-bar {
+  height: 18px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(90deg, #7A5010, #C4952A 20%, #F0D060 50%, #C4952A 80%, #7A5010);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,240,120,0.5);
+  position: relative;
+}
+.fc-diamond {
+  width: 9px;
+  height: 9px;
+  background: linear-gradient(135deg, #FFF0A0 0%, #C89820 50%, #7A5010 100%);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(255,210,40,0.7);
+}
+/* floating medallions at top corners */
+.fc-medal-left, .fc-medal-right {
+  position: absolute;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #F4D060, #C89820 40%, #7A5010 75%, #4A3008 100%);
+  box-shadow: 0 0 0 2px #2E1A06, 0 0 0 3px #9A6820, 0 3px 10px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,220,80,0.4);
+  top: -10px;
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+.fc-medal-left { left: -10px; }
+.fc-medal-right { right: -10px; }
+.fc-medal-inner { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #FFE080, #B08020); box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
+/* parchment content panel */
+.fc-parchment {
+  min-height: 130px;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(100,60,5,0.04) 22px, rgba(100,60,5,0.04) 23px),
+    repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(100,60,5,0.02) 22px, rgba(100,60,5,0.02) 23px),
+    linear-gradient(165deg, #F0E4C0 0%, #E8D89A 45%, #EEE0B0 75%, #E4D490 100%);
+  border: 1px solid rgba(160,110,30,0.35);
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,200,60,0.06);
+  margin: 0 2px;
+}
+/* diamond separator between parchment and scroll */
+.fc-separator {
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px 0;
+  gap: 8px;
+}
+.fc-sep-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #C4952A88, transparent); }
+.fc-sep-gem {
+  width: 8px; height: 8px;
+  background: linear-gradient(135deg, #F0C840, #9A6820);
+  transform: rotate(45deg);
+  box-shadow: 0 0 6px rgba(220,170,30,0.6);
+}
+/* scroll/banner footer */
+.fc-scroll {
+  border-radius: 4px;
+  background: linear-gradient(180deg, #EEE2BE 0%, #E4D49A 100%);
+  border: 1px solid rgba(160,110,30,0.4);
+  padding: 9px 14px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,240,160,0.8);
+}
+/* scroll end-caps */
+.fc-scroll::before, .fc-scroll::after {
+  content: '';
+  position: absolute;
+  top: -3px; bottom: -3px;
+  width: 10px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #D4A820, #8A6010 50%, #C89820);
+  box-shadow: 0 0 0 1px #3A2208;
+}
+.fc-scroll::before { left: -3px; }
+.fc-scroll::after { right: -3px; }
+.fc-scroll-text { font-family: 'Cinzel', serif; font-size: 10px; color: #4A2808; letter-spacing: 0.06em; }
+
+
+/* ══════════════════════════════════════════════════════
+   WOODEN COIN BUTTONS
+══════════════════════════════════════════════════════ */
+.coin-showcase {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+  padding: 32px 0 48px;
+}
+.coin-col { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.coin-col-title { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #5A4830; margin-bottom: 4px; }
+.coin-grid { display: grid; grid-template-columns: repeat(2, 88px); gap: 16px; }
+
+.coin-btn {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  border: none; cursor: pointer;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  /* gold ring */
+  background: conic-gradient(
+    #F8E070 0deg, #D4A820 30deg, #A07820 60deg, #7A5010 90deg,
+    #C4952A 120deg, #F0C840 150deg, #D4A820 180deg,
+    #F8E070 210deg, #C89820 240deg, #8A6010 270deg,
+    #C4952A 300deg, #F0C840 330deg, #F8E070 360deg
+  );
+  box-shadow:
+    0 0 0 2px #2A1806,
+    0 5px 20px rgba(0,0,0,0.75),
+    0 0 0 4px rgba(194,149,42,0.2),
+    inset 0 1px 0 rgba(255,240,120,0.4);
+}
+.coin-btn-inner {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  /* warm tavern wood */
+  background:
+    radial-gradient(ellipse at 30% 28%, rgba(100,50,8,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 72% 72%, rgba(10,5,1,0.65) 0%, transparent 45%),
+    repeating-linear-gradient(18deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 3px),
+    linear-gradient(145deg, #4E2610 0%, #2E1206 50%, #3C1A08 100%);
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.75), inset 0 -1px 4px rgba(255,180,50,0.08);
+}
+/* 4 diamond notches on gold ring */
+.coin-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(4px 4px at 50% 4px, #F8E070 50%, transparent 50%),
+    radial-gradient(4px 4px at 50% 96px, #F8E070 50%, transparent 50%),
+    radial-gradient(4px 4px at 4px 50%, #F8E070 50%, transparent 50%),
+    radial-gradient(4px 4px at 84px 50%, #F8E070 50%, transparent 50%);
+  pointer-events: none;
+}
+.coin-icon { font-size: 26px; line-height: 1; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8)); }
+.coin-label { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #5A4030; font-family: 'Inter', sans-serif; text-align: center; }
+
+/* dark premium wood variant */
+.coin-btn.prem {
+  background: conic-gradient(
+    #C8A848 0deg, #9A7828 30deg, #5A3808 60deg, #3A2408 90deg,
+    #8A6420 120deg, #B49038 150deg, #9A7828 180deg,
+    #C8A848 210deg, #8A6820 240deg, #4A3008 270deg,
+    #8A6420 300deg, #B49038 330deg, #C8A848 360deg
+  );
+  box-shadow:
+    0 0 0 2px #180E04,
+    0 5px 20px rgba(0,0,0,0.8),
+    0 0 0 4px rgba(154,120,40,0.15);
+}
+.coin-btn.prem .coin-btn-inner {
+  background:
+    radial-gradient(ellipse at 28% 25%, rgba(50,25,5,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 78%, rgba(5,2,0,0.8) 0%, transparent 40%),
+    repeating-linear-gradient(18deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px),
+    linear-gradient(145deg, #261208 0%, #120804 50%, #1C0E06 100%);
+}
+.coin-btn.prem .coin-icon { opacity: 0.75; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.9)); }
+
+
+/* ══════════════════════════════════════════════════════
+   GOLDEN HALL SCOREBOARD
+══════════════════════════════════════════════════════ */
+.golden-hall-wrap {
+  max-width: 580px;
+  margin: 32px auto 48px;
+  padding: 0 40px;
+}
+.golden-hall {
+  position: relative;
+  padding: 0 32px;
+}
+/* gold columns */
+.gh-col {
+  position: absolute;
+  top: -12px; bottom: -12px;
+  width: 24px;
+  border-radius: 4px;
+  background: linear-gradient(180deg,
+    #F8E070 0%, #C89820 8%, #8A6010 16%,
+    #C4952A 22%, #F0C840 28%, #9A6820 35%,
+    #8A5C10 42%, #C89820 50%,
+    #8A5C10 58%, #C89820 65%,
+    #F0C840 72%, #9A6820 78%,
+    #8A6010 86%, #C89820 92%, #F8E070 100%);
+  box-shadow: 0 0 0 1px #2E1A06, 2px 0 12px rgba(0,0,0,0.6), inset 1px 0 0 rgba(255,220,80,0.25);
+}
+.gh-col::before, .gh-col::after {
+  content: '';
+  position: absolute; left: -5px; right: -5px; height: 14px;
+  background: linear-gradient(180deg, #F4D060, #C89820, #7A5010);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #2E1A06;
+}
+.gh-col::before { top: 0; }
+.gh-col::after { bottom: 0; }
+.gh-col.left { left: 4px; }
+.gh-col.right { right: 4px; }
+
+.gh-panel {
+  background: linear-gradient(180deg, #0C0A06 0%, #100E08 60%, #0A0804 100%);
+  border: 1px solid #4A3408;
+  border-radius: 6px;
+  padding: 22px 24px 24px;
+  box-shadow:
+    inset 0 1px 0 rgba(194,149,42,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 0 60px rgba(194,149,42,0.06),
+    0 8px 40px rgba(0,0,0,0.9);
+}
+
+.gh-title {
+  font-family: 'Cinzel', serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  text-align: center; color: #C4952A;
+  text-shadow: 0 0 24px rgba(194,149,42,0.5);
+  margin-bottom: 18px;
+}
+.gh-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.gh-div-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #C4952A66, transparent); }
+.gh-div-gem { width: 7px; height: 7px; background: #2DD4BF; transform: rotate(45deg); box-shadow: 0 0 10px rgba(45,212,191,0.7); }
+
+.gh-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.gh-slot {
+  border-radius: 5px;
+  background: linear-gradient(180deg, #060504 0%, #0C0A06 100%);
+  border: 1px solid #4A3408;
+  padding: 12px 8px 10px;
+  display: flex; flex-direction: column; align-items: center;
+  box-shadow:
+    inset 0 3px 12px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(194,149,42,0.04),
+    0 0 20px rgba(194,149,42,0.03);
+}
+.gh-num {
+  font-family: 'Cinzel', serif;
+  font-size: 26px; font-weight: 700; line-height: 1.1;
+  text-shadow: 0 0 24px currentColor, 0 0 48px currentColor;
+  margin-bottom: 5px;
+}
+.gh-sublabel { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #4A3820; }
+
+.gh-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  border-top: 1px solid #2E1E08;
+  padding-top: 14px;
+}
+.gh-stat { text-align: center; }
+.gh-stat-val { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; color: #C4952A; }
+.gh-stat-key { font-size: 9px; color: #4A3820; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; }
+
+
+/* ══════════════════════════════════════════════════════
+   COZY TAVERN CARD — full ambient "inn" treatment
+══════════════════════════════════════════════════════ */
+.tavern-showcase {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding: 32px 0 48px;
+}
+
+.tavern-card {
+  width: 288px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #4A3010;
+  box-shadow:
+    0 0 0 1px #2A1808,
+    0 8px 48px rgba(0,0,0,0.85),
+    0 0 40px rgba(196,133,43,0.07);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(220,160,40,0.10) 0%, transparent 55%),
+    linear-gradient(180deg, #1A1208 0%, #110C06 100%);
+}
+/* candlelight ambient top glow */
+.tavern-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,160,40,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.tc-header {
+  padding: 18px 18px 14px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid #3A2208;
+  position: relative;
+}
+.tc-avatar {
+  width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+  background: radial-gradient(circle at 35% 35%, #D4A820, #8A6010 60%, #4A2808 100%);
+  border: 2px solid #9A6820;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6), 0 0 14px rgba(200,152,30,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: #1A0A02;
+}
+.tc-meta { flex: 1; min-width: 0; }
+.tc-guild { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700; color: #F0E8D8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tc-sub { font-size: 11px; color: #6A5030; margin-top: 3px; }
+.tc-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 99px;
+  display: flex; align-items: center; gap: 4px;
+  flex-shrink: 0;
+}
+
+.tc-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* quest block */
+.tc-quest {
+  border-radius: 8px;
+  background: linear-gradient(145deg, #1E1508 0%, #150F04 100%);
+  border: 1px solid #3A2208;
+  padding: 13px 14px;
+  box-shadow: inset 0 1px 0 rgba(255,180,40,0.04);
+}
+.tc-quest-title {
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600;
+  color: #E0C060; margin-bottom: 5px; letter-spacing: 0.03em;
+}
+.tc-quest-desc { font-size: 11px; color: #6A5030; line-height: 1.65; margin-bottom: 10px; }
+
+/* progress */
+.tc-prog-wrap { display: flex; flex-direction: column; gap: 5px; }
+.tc-prog-head { display: flex; justify-content: space-between; }
+.tc-prog-label { font-size: 10px; font-weight: 600; color: #9B8B7A; }
+.tc-prog-pct { font-size: 10px; color: #C4852B; font-weight: 600; }
+.tc-prog-track {
+  height: 7px; background: #0A0804; border-radius: 99px;
+  border: 1px solid #3A2208;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+.tc-prog-fill {
+  height: 100%; border-radius: 99px; width: 62%;
+  background: linear-gradient(90deg, #9A6820, #EAC040 60%, #C89820);
+  box-shadow: 0 0 8px rgba(220,180,40,0.45);
+}
+
+/* chips / tags */
+.tc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tc-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 99px;
+}
+
+/* warm ornamental divider */
+.tc-divider {
+  display: flex; align-items: center; gap: 8px;
+}
+.tc-div-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #4A3010, transparent); }
+.tc-div-gem { width: 5px; height: 5px; background: #C4852B; transform: rotate(45deg); box-shadow: 0 0 6px rgba(196,133,43,0.5); }
+
+/* action buttons */
+.tc-btn-row { display: flex; gap: 8px; }
+.tc-btn-primary {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 700 11px/1 'Cinzel', serif; letter-spacing: 0.06em; color: #1A0804;
+  background: linear-gradient(180deg, #F2D060 0%, #C89820 25%, #9A7020 55%, #C89820 80%, #ECC040 100%);
+  box-shadow: 0 2px 0 #6A4810, 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,240,120,0.5);
+  text-shadow: 0 1px 0 rgba(255,220,80,0.5);
+}
+.tc-btn-ghost {
+  flex: 1; padding: 10px 0; border-radius: 6px; cursor: pointer;
+  font: 600 11px/1 'Inter', sans-serif; background: transparent;
+  border: 1px solid #3A2808; color: #7A6848;
+  box-shadow: inset 0 1px 0 rgba(255,180,40,0.04);
+}
+/* teal secondary button */
+.tc-btn-teal {
+  flex: 1; padding: 10px 0; border-radius: 6px; border: none; cursor: pointer;
+  font: 600 11px/1 'Inter', sans-serif; color: #0A2A28;
+  background: linear-gradient(180deg, #38E8D8 0%, #20B8A8 40%, #189890 100%);
+  box-shadow: 0 2px 0 #0E6860, 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(120,255,240,0.4);
+}
+
+/* comment / activity */
+.tc-comment { font-size: 11px; color: #6A5030; line-height: 1.6; }
+.tc-ts { background: rgba(196,133,43,0.15); color: #C4852B; padding: 1px 5px; border-radius: 3px; font-weight: 600; font-size: 11px; }
+
+/* bottom tab bar */
+.tc-tabs { display: flex; border-top: 1px solid #2A1A08; margin: 4px -18px -18px; padding: 10px 18px 8px; }
+.tc-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; color: #3E2E18; }
+.tc-tab.on { color: #C4852B; font-weight: 600; }
+.tc-tab-pip { width: 18px; height: 3px; border-radius: 99px; background: transparent; }
+.tc-tab.on .tc-tab-pip { background: linear-gradient(90deg, #C89820, #F0C840); box-shadow: 0 0 6px rgba(200,152,32,0.5); }
+
 </style>
 </head>
 <body>
@@ -1364,6 +1838,407 @@ body {
 
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION: ORNATE CARD FRAME
+════════════════════════════════════════════ -->
+<p class="section-label">Ornate Card Frame — Hearthstone-style fantasy card</p>
+<p class="section-note">Multi-layer gold border, dark navy surround, parchment content area, corner medallions, diamond accent, scroll footer. Two accent variants shown.</p>
+
+<div class="card-showcase">
+
+  <!-- Amber card -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div style="font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A4830">Squabble Amber</div>
+    <div class="fantasy-card-frame" style="position:relative">
+      <div class="fc-medal-left"><div class="fc-medal-inner"></div></div>
+      <div class="fc-medal-right">
+        <!-- avatar circle -->
+        <div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#F4D060,#8A6010 70%,#3A1C06 100%);box-shadow:inset 0 1px 3px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:#1A0A02">W</div>
+      </div>
+      <div class="fc-navy">
+        <div class="fc-top-bar"><div class="fc-diamond"></div></div>
+        <div class="fc-parchment" style="margin-bottom:0"></div>
+        <div class="fc-separator">
+          <div class="fc-sep-line"></div>
+          <div class="fc-sep-gem"></div>
+          <div class="fc-sep-line"></div>
+        </div>
+        <div class="fc-scroll"><div class="fc-scroll-text">skill description</div></div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#5A4830;text-align:center;line-height:1.7">Primary accent<br><span style="font-family:monospace;color:#C4852B">#C4852B</span></div>
+  </div>
+
+  <!-- Frost Teal card (rare variant) -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div style="font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A4830">Frost Teal — Rare</div>
+    <div class="fantasy-card-frame" style="background:linear-gradient(180deg,#A0F0E8 0%,#20A890 12%,#0A5A50 25%,#189880 38%,#0A4A40 50%,#1A8A78 62%,#30D0C0 75%,#188870 88%,#60E8D8 100%);box-shadow:0 0 0 2px #062E28,0 0 0 4px #1A8A70,0 10px 48px rgba(0,0,0,.95),0 0 32px rgba(45,212,191,.12),inset 0 1px 0 rgba(120,255,240,.4),inset 0 -2px 0 rgba(0,0,0,.6)">
+      <div class="fc-medal-left"><div class="fc-medal-inner" style="background:radial-gradient(circle at 40% 40%,#A0F0E8,#20A890)"></div></div>
+      <div class="fc-medal-right" style="background:radial-gradient(circle at 35% 35%,#A0F0E8,#20A890 40%,#0A5A50 75%,#062E28 100%)">
+        <div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#A0F0E8,#1A8870 70%,#06302A 100%);box-shadow:inset 0 1px 3px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:#062E28">R</div>
+      </div>
+      <div class="fc-navy" style="background:linear-gradient(160deg,#0E1E22 0%,#081418 55%,#0C1C20 100%)">
+        <div class="fc-top-bar" style="background:linear-gradient(90deg,#0A5A50,#1A9888 20%,#40D8C8 50%,#1A9888 80%,#0A5A50)">
+          <div class="fc-diamond" style="background:linear-gradient(135deg,#A0F0E8 0%,#1A9888 50%,#0A4A40 100%);box-shadow:0 0 8px rgba(45,212,191,.7)"></div>
+        </div>
+        <div class="fc-parchment" style="background:repeating-linear-gradient(0deg,transparent,transparent 22px,rgba(5,60,55,.04) 22px,rgba(5,60,55,.04) 23px),linear-gradient(165deg,#EAF8F4 0%,#D8F0EA 45%,#E2F4F0 75%,#D4EEE8 100%);border-color:rgba(30,160,140,.3)"></div>
+        <div class="fc-separator">
+          <div class="fc-sep-line" style="background:linear-gradient(90deg,transparent,#2DD4BF88,transparent)"></div>
+          <div class="fc-sep-gem" style="background:linear-gradient(135deg,#80F0E0,#1A9888);box-shadow:0 0 8px rgba(45,212,191,.7)"></div>
+          <div class="fc-sep-line" style="background:linear-gradient(90deg,transparent,#2DD4BF88,transparent)"></div>
+        </div>
+        <div class="fc-scroll" style="background:linear-gradient(180deg,#EAF8F4 0%,#D8F0EA 100%);border-color:rgba(30,160,140,.35)"><div class="fc-scroll-text" style="color:#083830">rare ability</div></div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#5A4830;text-align:center;line-height:1.7">Secondary accent<br><span style="font-family:monospace;color:#2DD4BF">#2DD4BF</span></div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION: WOODEN COIN BUTTONS
+════════════════════════════════════════════ -->
+<p class="section-label">Wooden Coin Buttons — navigation icon style</p>
+<p class="section-note">Circular buttons with ornate gold ring, wood-grain interior. Left: warm tavern wood. Right: dark premium wood (aged brass ring).</p>
+
+<div class="coin-showcase">
+
+  <!-- Warm tavern wood -->
+  <div class="coin-col">
+    <div class="coin-col-title">Warm Tavern Wood</div>
+    <div class="coin-grid">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878">⌂</span></div>
+        </button>
+        <div class="coin-label">Home</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878">⚙</span></div>
+        </button>
+        <div class="coin-label">Settings</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878;font-size:22px">⛺</span></div>
+        </button>
+        <div class="coin-label">Guild</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878;font-size:22px">✦</span></div>
+        </button>
+        <div class="coin-label">Quests</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878;font-size:20px">↺</span></div>
+        </button>
+        <div class="coin-label">Refresh</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878;font-size:20px">⇗</span></div>
+        </button>
+        <div class="coin-label">Share</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn" style="background:conic-gradient(#F0D060 0deg,#C89820 30deg,#A07820 60deg,#C4952A 90deg,#F0C840 120deg,#D4A820 180deg,#C4952A 240deg,#F0C840 300deg,#F0D060 360deg)">
+          <div class="coin-btn-inner" style="background:radial-gradient(ellipse at 35% 30%,rgba(120,60,10,.5) 0%,transparent 55%),linear-gradient(145deg,#4A2408 0%,#2A1006 50%,#381808 100%)">
+            <span style="font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:#F0D878;letter-spacing:.04em">Bacc</span>
+          </div>
+        </button>
+        <div class="coin-label">Back</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#F0D878;font-size:22px">←</span></div>
+        </button>
+        <div class="coin-label">Previous</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark premium wood -->
+  <div class="coin-col">
+    <div class="coin-col-title">Dark Premium Wood</div>
+    <div class="coin-grid">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85">⌂</span></div>
+        </button>
+        <div class="coin-label">Home</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85">✦</span></div>
+        </button>
+        <div class="coin-label">Quests</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85">⚙</span></div>
+        </button>
+        <div class="coin-label">Settings</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85;font-size:20px">→</span></div>
+        </button>
+        <div class="coin-label">Next</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85;font-size:20px">★</span></div>
+        </button>
+        <div class="coin-label">Favorites</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85;font-size:20px">↓</span></div>
+        </button>
+        <div class="coin-label">Download</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85;font-size:20px">↑</span></div>
+        </button>
+        <div class="coin-label">Upload</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="coin-btn prem">
+          <div class="coin-btn-inner"><span class="coin-icon" style="color:#C8A848;opacity:.85;font-size:20px">←</span></div>
+        </button>
+        <div class="coin-label">Previous</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION: GOLDEN HALL SCOREBOARD
+════════════════════════════════════════════ -->
+<p class="section-label">Golden Hall Scoreboard — grand display panel</p>
+<p class="section-note">Architectural gold columns, recessed glowing number slots, teal gem accents. Used for leaderboards, season stats, chapter completion screens.</p>
+
+<div class="golden-hall-wrap">
+  <div class="golden-hall">
+    <div class="gh-col left"></div>
+    <div class="gh-col right"></div>
+    <div class="gh-panel">
+
+      <div class="gh-title">Fantasy Club Board</div>
+
+      <div class="gh-divider">
+        <div class="gh-div-line"></div>
+        <div class="gh-div-gem"></div>
+        <div class="gh-div-line"></div>
+        <div class="gh-div-gem"></div>
+        <div class="gh-div-line"></div>
+      </div>
+
+      <div class="gh-slots">
+        <div class="gh-slot">
+          <div class="gh-num" style="color:#C4952A">247</div>
+          <div class="gh-sublabel">Books Read</div>
+        </div>
+        <div class="gh-slot" style="box-shadow:inset 0 3px 12px rgba(0,0,0,.85),0 0 24px rgba(45,212,191,.08)">
+          <div class="gh-num" style="color:#2DD4BF">14</div>
+          <div class="gh-sublabel">This Month</div>
+        </div>
+        <div class="gh-slot">
+          <div class="gh-num" style="color:#C4952A">★ 4.7</div>
+          <div class="gh-sublabel">Avg Rating</div>
+        </div>
+        <div class="gh-slot">
+          <div class="gh-num" style="color:#C4952A">82</div>
+          <div class="gh-sublabel">Members</div>
+        </div>
+        <div class="gh-slot" style="box-shadow:inset 0 3px 12px rgba(0,0,0,.85),0 0 24px rgba(45,212,191,.06)">
+          <div class="gh-num" style="color:#2DD4BF">3</div>
+          <div class="gh-sublabel">Active Quests</div>
+        </div>
+        <div class="gh-slot">
+          <div class="gh-num" style="color:#C4952A">12</div>
+          <div class="gh-sublabel">Chapters Live</div>
+        </div>
+      </div>
+
+      <div class="gh-row">
+        <div class="gh-stat">
+          <div class="gh-stat-val">Los Goobers</div>
+          <div class="gh-stat-key">Top Guild</div>
+        </div>
+        <div class="gh-stat">
+          <div class="gh-stat-val" style="color:#2DD4BF">Westley</div>
+          <div class="gh-stat-key">MVP Reader</div>
+        </div>
+        <div class="gh-stat">
+          <div class="gh-stat-val">Season IV</div>
+          <div class="gh-stat-key">Current</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION: COZY TAVERN CARD
+════════════════════════════════════════════ -->
+<p class="section-label">Cozy Tavern Card — full ambient "inn" treatment</p>
+<p class="section-note">Candlelight ambient glow, warm wood frame, gold progress bar, ornamental diamond divider. Two cards showing amber CTA vs teal secondary action.</p>
+
+<div class="tavern-showcase">
+
+  <!-- Amber primary card -->
+  <div class="tavern-card">
+    <div class="tc-header">
+      <div class="tc-avatar">W</div>
+      <div class="tc-meta">
+        <div class="tc-guild">Los Goobers</div>
+        <div class="tc-sub">Fantasy Lit-RPG · 8 members</div>
+      </div>
+      <div class="tc-badge" style="background:rgba(196,133,43,.15);border:1px solid rgba(196,133,43,.3);color:#C4852B">
+        <span style="width:6px;height:6px;border-radius:50%;background:#4ADE80;box-shadow:0 0 6px rgba(74,222,128,.6);flex-shrink:0"></span>
+        Active
+      </div>
+    </div>
+    <div class="tc-body">
+
+      <div class="tc-quest">
+        <div class="tc-quest-title">⚔ The Iron Throne of Pages</div>
+        <div class="tc-quest-desc">Complete 3 chapters from the current selection before the next guild meet. Discussion unlocks at 80% completion.</div>
+        <div class="tc-prog-wrap">
+          <div class="tc-prog-head">
+            <span class="tc-prog-label">Guild Progress</span>
+            <span class="tc-prog-pct">62%</span>
+          </div>
+          <div class="tc-prog-track"><div class="tc-prog-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="tc-tags">
+        <span class="tc-tag" style="background:rgba(196,133,43,.15);border-color:rgba(196,133,43,.35);color:#C4852B">Epic Quest</span>
+        <span class="tc-tag" style="background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.3);color:#2DD4BF">Enchanted</span>
+        <span class="tc-tag" style="background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3);color:#4ADE80">On Track</span>
+      </div>
+
+      <div class="tc-divider">
+        <div class="tc-div-line"></div>
+        <div class="tc-div-gem"></div>
+        <div class="tc-div-line"></div>
+      </div>
+
+      <div class="tc-btn-row">
+        <button class="tc-btn-primary">Start Reading</button>
+        <button class="tc-btn-ghost">View Guild</button>
+      </div>
+
+      <div class="tc-comment">
+        Donto · <span class="tc-ts">13:25</span> lol just hit me this is Animal Crossing
+      </div>
+
+      <div class="tc-tabs">
+        <div class="tc-tab on">
+          <div class="tc-tab-pip"></div>
+          Library
+        </div>
+        <div class="tc-tab">
+          <div class="tc-tab-pip"></div>
+          Guild
+        </div>
+        <div class="tc-tab">
+          <div class="tc-tab-pip"></div>
+          Quests
+        </div>
+        <div class="tc-tab">
+          <div class="tc-tab-pip"></div>
+          Profile
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teal secondary action card -->
+  <div class="tavern-card" style="border-color:#1A4038;background:radial-gradient(ellipse at 50% -10%,rgba(45,212,191,.08) 0%,transparent 55%),linear-gradient(180deg,#081614 0%,#060E0C 100%)">
+    <div class="tc-header" style="border-color:#1A3A30">
+      <div class="tc-avatar" style="background:radial-gradient(circle at 35% 35%,#40D8C8,#108870 60%,#062E28 100%);border-color:#1A9880;box-shadow:0 2px 10px rgba(0,0,0,.6),0 0 14px rgba(45,212,191,.18)">M</div>
+      <div class="tc-meta">
+        <div class="tc-guild" style="color:#D8F8F0">The Mage Tower</div>
+        <div class="tc-sub" style="color:#2A5A50">Arcane Lit · 12 members</div>
+      </div>
+      <div class="tc-badge" style="background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25);color:#2DD4BF">
+        <span style="width:6px;height:6px;border-radius:50%;background:#4ADE80;box-shadow:0 0 6px rgba(74,222,128,.6);flex-shrink:0"></span>
+        Casting
+      </div>
+    </div>
+    <div class="tc-body">
+
+      <div class="tc-quest" style="background:linear-gradient(145deg,#0C1E1A 0%,#081410 100%);border-color:#1A3A30">
+        <div class="tc-quest-title" style="color:#40D8C8">✦ The Arcane Chronicle Vol. 3</div>
+        <div class="tc-quest-desc" style="color:#2A5A50">Decode the runes across chapters 7–11. First to complete earns the Archmage badge this season.</div>
+        <div class="tc-prog-wrap">
+          <div class="tc-prog-head">
+            <span class="tc-prog-label" style="color:#2A5A50">Guild Progress</span>
+            <span class="tc-prog-pct" style="color:#2DD4BF">78%</span>
+          </div>
+          <div class="tc-prog-track" style="background:#060E0C;border-color:#1A3A30">
+            <div class="tc-prog-fill" style="width:78%;background:linear-gradient(90deg,#108870,#40E8D8 60%,#20B8A8);box-shadow:0 0 8px rgba(45,212,191,.5)"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc-tags">
+        <span class="tc-tag" style="background:rgba(45,212,191,.12);border-color:rgba(45,212,191,.3);color:#2DD4BF">Arcane Quest</span>
+        <span class="tc-tag" style="background:rgba(196,133,43,.12);border-color:rgba(196,133,43,.3);color:#C4852B">Legendary</span>
+        <span class="tc-tag" style="background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3);color:#4ADE80">Almost Done</span>
+      </div>
+
+      <div class="tc-divider">
+        <div class="tc-div-line" style="background:linear-gradient(90deg,transparent,#1A4038,transparent)"></div>
+        <div class="tc-div-gem" style="background:#2DD4BF;box-shadow:0 0 6px rgba(45,212,191,.5)"></div>
+        <div class="tc-div-line" style="background:linear-gradient(90deg,transparent,#1A4038,transparent)"></div>
+      </div>
+
+      <div class="tc-btn-row">
+        <button class="tc-btn-teal">Cast Spell</button>
+        <button class="tc-btn-ghost" style="border-color:#1A3A30;color:#2A5A50">Spellbook</button>
+      </div>
+
+      <div class="tc-comment" style="color:#2A5A50">
+        Merlin · <span style="background:rgba(45,212,191,.15);color:#2DD4BF;padding:1px 5px;border-radius:3px;font-weight:600;font-size:11px">09:44</span> the runes in ch.9 are fire
+      </div>
+
+      <div class="tc-tabs" style="border-color:#1A3A30">
+        <div class="tc-tab on" style="color:#2DD4BF">
+          <div class="tc-tab-pip" style="background:linear-gradient(90deg,#20B8A8,#40E8D8);box-shadow:0 0 6px rgba(45,212,191,.5)"></div>
+          Library
+        </div>
+        <div class="tc-tab" style="color:#1A3A30">
+          <div class="tc-tab-pip"></div>
+          Guild
+        </div>
+        <div class="tc-tab" style="color:#1A3A30">
+          <div class="tc-tab-pip"></div>
+          Quests
+        </div>
+        <div class="tc-tab" style="color:#1A3A30">
+          <div class="tc-tab-pip"></div>
+          Profile
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 
 <p style="margin-top:56px;font-size:12px;color:#4A3E34;text-align:center;line-height:1.8">
   Contrast ratios calculated per WCAG 2.1 relative luminance formula.<br>
